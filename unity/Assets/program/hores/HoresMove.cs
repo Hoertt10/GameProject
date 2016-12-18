@@ -15,7 +15,7 @@ public class HoresMove : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-        TimerX += 0.02f;
+        //TimerX += 0.02f;
         TimerY += 0.05f;
         Vector3 rPos = pos;
         rPos.x = rPos.x + Mathf.Cos(TimerX) * 10f;
