@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/JT/Level1.unity
+- path: Assets/Scene/Hoertt/hores.unity
   isLoaded: 1
   isActive: 1
