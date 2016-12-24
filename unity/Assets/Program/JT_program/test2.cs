@@ -1517,4 +1517,10 @@ public class Display : MonoBehaviour {
                 dieTimer.SecondsToDie = Life;
 
 
+[Header("Status")]
+[Range(1,10)]
+	public int speed =5;
+
+
+
 */

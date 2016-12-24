@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class Menu_start : MonoBehaviour {
+public class Level2_Menu_start : MonoBehaviour {
 
 	[SerializeField]private GameObject obj;
 

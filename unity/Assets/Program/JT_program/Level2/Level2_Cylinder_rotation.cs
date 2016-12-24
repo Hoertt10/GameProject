@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Cylinder_rotation : MonoBehaviour {
+public class Level2_Cylinder_rotation : MonoBehaviour {
 
+	[Header("Status")]
+	[Range(1,10)]
 	public int speed =5;
 
 

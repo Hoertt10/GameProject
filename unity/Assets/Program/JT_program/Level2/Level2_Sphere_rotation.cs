@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sphere_rotation : MonoBehaviour {
+public class Level2_Sphere_rotation : MonoBehaviour {
 
+	[Header("Status")]
+	[Range(1,10)]
 	public int speed=5;
 
 	public  static bool rotation = false;
 
-	public Level2_display L2d = new Level2_display ();
+	public Level2_display L2d;
+
 
 
 	void Start () {
