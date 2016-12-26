@@ -175,6 +175,7 @@ public class Level1_Display : MonoBehaviour
 
 		if (UFO.Count == 3 && compare) 
 		{
+			//比對陣列是否一致
 			if (UFO.SequenceEqual (RandomUFO))
 			{
 				//答對

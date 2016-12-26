@@ -182,29 +182,28 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
      <Compile Include="Assets\Pixelplacement\iTweenPath\iTweenPath.cs" />
-     <Compile Include="Assets\Program\Hoertt_program\hores\DefalueHorse.cs" />
-     <Compile Include="Assets\Program\Hoertt_program\hores\HoresMove.cs" />
-     <Compile Include="Assets\Program\Hoertt_program\ship\ObjMove.cs" />
-     <Compile Include="Assets\Program\Hoertt_program\ship\StartMove.cs" />
-     <Compile Include="Assets\Program\Hoertt_program\ship\click.cs" />
-     <Compile Include="Assets\Program\Hoertt_program\ship\defalue.cs" />
-     <Compile Include="Assets\Program\Hoertt_program\ship\show.cs" />
-     <Compile Include="Assets\Program\JT_program\Level1\Level1_Display.cs" />
-     <Compile Include="Assets\Program\JT_program\Level1\Level1_Listener.cs" />
-     <Compile Include="Assets\Program\JT_program\Level1\Level1_Timer.cs" />
-     <Compile Include="Assets\Program\JT_program\Level1\Menu1_start.cs" />
-     <Compile Include="Assets\Program\JT_program\Level2\Level2_Cylinder_rotation.cs" />
-     <Compile Include="Assets\Program\JT_program\Level2\Level2_Menu_start.cs" />
-     <Compile Include="Assets\Program\JT_program\Level2\Level2_Sphere_rotation.cs" />
-     <Compile Include="Assets\Program\JT_program\Level2\Level2_display.cs" />
-     <Compile Include="Assets\Program\JT_program\Level2\level2test1.cs" />
-     <Compile Include="Assets\Program\JT_program\Level3\level3test.cs" />
-     <Compile Include="Assets\Program\JT_program\Level3\level3test2.cs" />
-     <Compile Include="Assets\Program\JT_program\Level3\level3test3.cs" />
-     <Compile Include="Assets\Program\JT_program\test2.cs" />
      <Compile Include="Assets\ProgressBar\Script\ProgressBarBehaviour.cs" />
      <Compile Include="Assets\ProgressBar\Script\ProgressRadialBehaviour.cs" />
      <Compile Include="Assets\ProgressBar\Script\Utils.cs" />
+     <Compile Include="Assets\program\Hoertt_program\hores\DefalueHorse.cs" />
+     <Compile Include="Assets\program\Hoertt_program\hores\HoresMove.cs" />
+     <Compile Include="Assets\program\Hoertt_program\ship\ObjMove.cs" />
+     <Compile Include="Assets\program\Hoertt_program\ship\StartMove.cs" />
+     <Compile Include="Assets\program\Hoertt_program\ship\click.cs" />
+     <Compile Include="Assets\program\Hoertt_program\ship\defalue.cs" />
+     <Compile Include="Assets\program\Hoertt_program\ship\show.cs" />
+     <Compile Include="Assets\program\JT_program\Level1\Level1_Display.cs" />
+     <Compile Include="Assets\program\JT_program\Level1\Level1_Listener.cs" />
+     <Compile Include="Assets\program\JT_program\Level1\Level1_Timer.cs" />
+     <Compile Include="Assets\program\JT_program\Level1\Menu1_start.cs" />
+     <Compile Include="Assets\program\JT_program\Level2\Level2_Cylinder_rotation.cs" />
+     <Compile Include="Assets\program\JT_program\Level2\Level2_Menu_start.cs" />
+     <Compile Include="Assets\program\JT_program\Level2\Level2_display.cs" />
+     <Compile Include="Assets\program\JT_program\Level2\level2test1.cs" />
+     <Compile Include="Assets\program\JT_program\Level3\level3test.cs" />
+     <Compile Include="Assets\program\JT_program\Level3\level3test2.cs" />
+     <Compile Include="Assets\program\JT_program\Level3\level3test3.cs" />
+     <Compile Include="Assets\program\JT_program\test2.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\NGUI\ReadMe - 3.8.0.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
@@ -243,9 +242,6 @@
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -260,9 +256,6 @@
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>

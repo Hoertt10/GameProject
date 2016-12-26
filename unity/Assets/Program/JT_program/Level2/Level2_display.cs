@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 
 public class Level2_display : MonoBehaviour
 {
+	[Header ("Object")]
+	[SerializeField]private GameObject Panel;
+	[SerializeField]private GameObject Bingo;
+	[SerializeField]private GameObject Error;
 
 	[Header ("List")]
-	public List<GameObject> ball_sequence = new List<GameObject> ();
-	public List<GameObject> ball = new List<GameObject> ();
+	public List<GameObject> Ball_sequence = new List<GameObject> ();
+	public List<GameObject> Ball_Random = new List<GameObject> ();
+	public static List<GameObject> Ball = new List<GameObject> ();
 
 	[Header ("Material")]
 	[SerializeField]private Material Red;
@@ -19,9 +24,16 @@ public class Level2_display : MonoBehaviour
 	public static Material Gray_static;
 	[SerializeField]private Material Gray;
 
+	[Header ("LookAt")]
+	//Camera將LookAt的中心點
+	public GameObject Center;
+
+
+	delegate  bool Clone (bool boo);
+
 	public static int ball_Arr = 0;
 
-	public GameObject Cylinder;
+	bool compare = true;
 
 
 	void Awake ()
@@ -38,77 +50,141 @@ public class Level2_display : MonoBehaviour
 		{
 			Debug.Log (obj.name);
 
-			if (obj.GetComponent<Renderer> ().material.color == TiffanyBlue_static.color)
+			if (obj.GetComponent<Renderer> ().material.color == TiffanyBlue_static.color) {
 				obj.GetComponent<Renderer> ().material = Gray_static;
-			else
+				Ball.Add (obj);
+			} else {
 				obj.GetComponent<Renderer> ().material = TiffanyBlue_static;
+				Ball.Remove (obj);
+			}
 		}
 	}
 
 
 
-	// Use this for initialization
+
 	void Start ()
 	{
+		
+
 		makeRandomArr ();
 		InvokeRepeating ("ShowLight", 1f, 1f);
 
-		UIEventListener.Get (ball [0]).onClick = new ClickEvent ().Action;
-		UIEventListener.Get (ball [1]).onClick = new ClickEvent ().Action;
-		UIEventListener.Get (ball [2]).onClick = new ClickEvent ().Action;
-		UIEventListener.Get (ball [3]).onClick = new ClickEvent ().Action;
-		UIEventListener.Get (ball [4]).onClick = new ClickEvent ().Action;
-		UIEventListener.Get (ball [5]).onClick = new ClickEvent ().Action;
-		UIEventListener.Get (ball [6]).onClick = new ClickEvent ().Action;
-		UIEventListener.Get (ball [7]).onClick = new ClickEvent ().Action;
-	}
+		Ball_Random.ForEach (i => UIEventListener.Get (i).onClick = new ClickEvent ().Action);
 	
+	}
+
+
+
 	// Update is called once per frame
 	void Update ()
 	{
-		gameObject.transform.LookAt (Cylinder.transform.position,Vector3.forward);
+		gameObject.transform.LookAt (Center.transform.position, Vector3.forward);
+
+		if (Ball.Count == 8 && compare) {
+
+			Clone clone = (bool boo) => {
+
+				GameObject Clone;
+
+				if (boo) {
+					//答對
+					Clone = NGUITools.AddChild (Panel, Bingo);
+
+				} else {
+					//答錯
+					Clone = NGUITools.AddChild (Panel, Error);
+				}
+
+				Clone.transform.localPosition = new Vector3 (140729, 100632, 26417);
+				Clone.transform.Rotate (Vector3.right, 33.24981f);
+				Clone.transform.localScale = new Vector3 (25000, 25000, 0);
+				iTween.ScaleFrom (Clone, iTween.Hash ("scale", Vector3.zero, "delay", 0.2, "oncomplete", "DestroyClone", "oncompletetarget", gameObject, "oncompleteparams", Clone));
+				return boo;
+			};
+
+			clone (Ball.SequenceEqual (Ball_Random));
+
+
+			compare = false;
+
+
+			Invoke ("restart", 1.5f);
+		}
+
 	}
 
+	void DestroyClone (GameObject obj)
+	{
+		Destroy (obj);
+	}
 
+	delegate GameObject go (GameObject go);
+
+	public void restart ()
+	{
+		
+		Ball.ForEach (i => i.GetComponent<Renderer> ().material = TiffanyBlue_static);
+
+		// This will copy all the items from Ball_Random to Ball_sequence
+//		Ball_Random.ForEach (i => Ball_sequence.Add (i));
+		Ball_sequence.AddRange (Ball_Random);
+
+		Ball.Clear ();
+
+		Ball_Random.Clear ();
+
+		compare = true;
+
+		makeRandomArr ();
+
+		ball_Arr = 0;
+
+		InvokeRepeating ("ShowLight", 1f, 1f);
+
+	}
 
 	void makeRandomArr ()
 	{
 		for (int i = 0; i < 8; i++) {
-			int num = Random.Range (0, ball_sequence.Count);
-			ball.Add (ball_sequence [num]);
-			ball_sequence [num] = ball_sequence [ball_sequence.Count - 1];
-			ball_sequence.RemoveAt (ball_sequence.Count - 1);
+			int num = Random.Range (0, Ball_sequence.Count);
+			Ball_Random.Add (Ball_sequence [num]);
+			Ball_sequence [num] = Ball_sequence [Ball_sequence.Count - 1];
+			Ball_sequence.RemoveAt (Ball_sequence.Count - 1);
 		}
 	}
 
 	public void showarr ()
 	{
-		foreach (GameObject obj in ball) {
-			Debug.Log (obj.name);
-		}
+		Ball_Random.ForEach (i => Debug.Log (i.name));
 	}
 
 	public void ShowLight ()
 	{
 		if (ball_Arr == 8) {
 			CancelInvoke ("ShowLight");
-			ball [7].GetComponent<Renderer> ().material = TiffanyBlue;
+			Ball_Random [7].GetComponent<Renderer> ().material = TiffanyBlue;
 		} else {
 			if (ball_Arr != 0) {
-				ball [ball_Arr].GetComponent<Renderer> ().material = Red;
-				ball [ball_Arr - 1].GetComponent<Renderer> ().material = TiffanyBlue;
+				Ball_Random [ball_Arr].GetComponent<Renderer> ().material = Red;
+				Ball_Random [ball_Arr - 1].GetComponent<Renderer> ().material = TiffanyBlue;
 			} else {
-				ball [ball_Arr].GetComponent<Renderer> ().material = Red;
+				Ball_Random [ball_Arr].GetComponent<Renderer> ().material = Red;
 			}
 			ball_Arr++;
 		}
 	}
 
+	public void ShowClickBall ()
+	{
+		Ball.ForEach (i => Debug.Log (i.name));
+	}
 
-	public void CameraMove(){
+
+	public void CameraMove ()
+	{
 		
-//		gameObject.GetComponent<TweenPosition>().enabled = true;
-//		gameObject.GetComponent<TweenOrthoSize> ().enabled = true;
+
 		gameObject.GetComponent<UIPlayTween> ().Play (true);
 
 
