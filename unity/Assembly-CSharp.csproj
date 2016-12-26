@@ -198,7 +198,10 @@
      <Compile Include="Assets\program\JT_program\Level1\Menu1_start.cs" />
      <Compile Include="Assets\program\JT_program\Level2\Level2_Cylinder_rotation.cs" />
      <Compile Include="Assets\program\JT_program\Level2\Level2_Menu_start.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\program\JT_program\Level2\Level2_Sphere_rotation.cs" />
+=======
+>>>>>>> mix
      <Compile Include="Assets\program\JT_program\Level2\Level2_display.cs" />
      <Compile Include="Assets\program\JT_program\Level2\level2test1.cs" />
      <Compile Include="Assets\program\JT_program\Level3\level3test.cs" />
@@ -243,9 +246,6 @@
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -260,9 +260,6 @@
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Purchasing">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityPurchasing/UnityEngine.Purchasing.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
