@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Level2_Cylinder_rotation : MonoBehaviour
 {
 
@@ -21,6 +22,8 @@ public class Level2_Cylinder_rotation : MonoBehaviour
 	public Level2_display ShowLight_instantiate;
 
 	bool rotation = false;
+
+
 
 	void Start ()
 	{

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System.Threading;
 
 public class Level2_display : MonoBehaviour
 {
@@ -71,7 +72,8 @@ public class Level2_display : MonoBehaviour
 		InvokeRepeating ("ShowLight", 1f, 1f);
 
 		Ball_Random.ForEach (i => UIEventListener.Get (i).onClick = new ClickEvent ().Action);
-	
+
+
 	}
 
 
