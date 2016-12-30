@@ -3,7 +3,7 @@ using System.Collections;
 
 public class test2 : MonoBehaviour {
 
-	float time = 0;
+	//float time = 0;
 
 //	test1 test;
 
@@ -1846,5 +1846,88 @@ public class Level2_display : MonoBehaviour
 
 	test t = (int y) => y + 5;
 		Debug.Log (t (5));
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+
+public class level2test1 : MonoBehaviour
+{
+	public string myString = "Hello World";
+	public bool group_timeEffect;
+	public  bool isPermanent;
+	bool isDividedOvertime;
+	float duration;
+	float tick;
+
+	// Add menu item named "My Window" to the Window menu
+	[MenuItem("Window/My Window")]
+	public static void ShowWindow()
+	{
+		//Show existing window instance. If one doesn't exist, make one.
+//		EditorWindow.GetWindow(typeof(level2test1));
+	}
+
+	void OnGUI()
+	{
+		GUILayout.Label("Base Settings", EditorStyles.boldLabel);
+		myString = EditorGUILayout.TextField("Text Field", myString);
+		group_timeEffect = EditorGUILayout.BeginToggleGroup("Time effect", group_timeEffect);
+		EditorGUI.BeginDisabledGroup(isDividedOvertime); //<---
+		isPermanent = EditorGUILayout.Toggle("Permanent", isPermanent);
+		tick = EditorGUILayout.FloatField("Tick", tick);
+		EditorGUI.EndDisabledGroup(); //<---
+		EditorGUI.BeginDisabledGroup(isPermanent); //<---
+		isDividedOvertime = EditorGUILayout.Toggle("Overtime", isDividedOvertime);
+		duration = EditorGUILayout.FloatField("Duration", duration);
+		EditorGUI.EndDisabledGroup(); //<---
+		EditorGUILayout.EndToggleGroup();
+	}
+
+
+//	public bool boo;
+//	bool   isTrue; 
+//
+//	void  OnInspectorGUI()    
+//	{  
+//		EditorGUILayout.Toggle("disable",isTrue); 
+//
+//		EditorGUI.BeginDisabledGroup(isTrue);   //如果nextPath == null為真，在Inspector面板上顯示，承灰色（即不可操作） 
+//
+//
+//		 
+//
+//		EditorGUI.EndDisabledGroup();  
+//
+//	}     
+
+
+//	public bool flag;
+//	public int i = 1;
+//	[CustomEditor (typeof(level2test1))]
+//	public class MyScriptEditor : Editor
+//	{
+//		override public void OnInspectorGUI ()
+//		{
+//			level2test1 myScript = (level2test1)target;
+//			
+//			myScript.flag = GUILayout.Toggle (myScript.flag, "Flag");
+//			
+//			if (myScript.flag)
+//				myScript.i = EditorGUILayout.IntSlider ("I field:", myScript.i, 1, 100);
+//
+//		}
+//	}
+//
+
+	void Start ()
+	{
+		
+	}
+	
+
+}
+
 
 */
