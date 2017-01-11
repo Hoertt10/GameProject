@@ -1,8 +1,4 @@
 sceneSetups:
-<<<<<<< Updated upstream
-- path: Assets/Scene/JT/Level3.unity
-=======
-- path: Assets/Scene/Hoertt/hores.unity
->>>>>>> Stashed changes
+- path: Assets/Scene/Hoertt/Car.unity
   isLoaded: 1
   isActive: 1
