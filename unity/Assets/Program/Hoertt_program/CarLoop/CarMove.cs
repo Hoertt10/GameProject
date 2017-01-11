@@ -11,7 +11,7 @@ public class CarMove : MonoBehaviour {
 
         //这里是设置类型，iTween的类型又很多种，在源码中的枚举EaseType中  
         //例如移动的特效，先震动在移动、先后退在移动、先加速在变速、等等  
-        args.Add("easeType", iTween.EaseType.easeInOutExpo);
+        args.Add("easeType", iTween.EaseType.linear);
 
         //移动的速度，  
         //args.Add("speed",10f);  
@@ -47,15 +47,24 @@ public class CarMove : MonoBehaviour {
         args.Add("islocal", false);
 
 
+        args.Add("oncomplete", "AnimationEnd");
+        args.Add("oncompleteparams", "end");
+        args.Add("oncompletetarget", gameObject);
         //三个循环类型 none loop pingPong (一般 循环 来回)    
         //args.Add("loopType", "none");  
         //args.Add("loopType", "loop");   
-        args.Add("loopType", iTween.LoopType.pingPong);
+        //args.Add("loopType", iTween.LoopType.pingPong);
+        args.Add("loopType", "loop");
         iTween.MoveTo(gameObject, args);
+
+
     }
-	
-	// Update is called once per frame
-	void Update () {
+    void AnimationEnd(string f)
+    {
+        Debug.Log("end : " + f);
+    }
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }
