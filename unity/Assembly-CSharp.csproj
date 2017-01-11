@@ -185,6 +185,9 @@
      <Compile Include="Assets\ProgressBar\Script\ProgressBarBehaviour.cs" />
      <Compile Include="Assets\ProgressBar\Script\ProgressRadialBehaviour.cs" />
      <Compile Include="Assets\ProgressBar\Script\Utils.cs" />
+     <Compile Include="Assets\program\Hoertt_program\CarLoop\CarMove.cs" />
+     <Compile Include="Assets\program\Hoertt_program\CarLoop\sound.cs" />
+     <Compile Include="Assets\program\Hoertt_program\CarLoop\trigger.cs" />
      <Compile Include="Assets\program\Hoertt_program\hores\DefalueHorse.cs" />
      <Compile Include="Assets\program\Hoertt_program\hores\HoresMove.cs" />
      <Compile Include="Assets\program\Hoertt_program\ship\ObjMove.cs" />
