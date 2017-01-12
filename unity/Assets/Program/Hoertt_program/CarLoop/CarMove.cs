@@ -7,6 +7,7 @@ public class CarMove : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //键值对儿的形式保存iTween所用到的参数  
+       // Hashtable args1, args2, args3, args4, args5, args6,;
         Hashtable args = new Hashtable();
 
         //这里是设置类型，iTween的类型又很多种，在源码中的枚举EaseType中  
@@ -20,7 +21,7 @@ public class CarMove : MonoBehaviour {
         //这个是处理颜色的。可以看源码的那个枚举。  
         //args.Add("NamedValueColor", "_SpecColor");
         //延迟执行时间  
-        args.Add("delay", 0.1f);
+        //args.Add("delay", 0.1f);
 
         //是否让游戏对象始终面朝路径行进的方向，拐弯的地方会自动旋转。  
         args.Add("orienttopath", true);
