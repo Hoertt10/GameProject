@@ -29,7 +29,7 @@ public class CarMove : MonoBehaviour {
          
        // args.Add("looktarget", Vector3.zero);
         //游戏对象看向“looktarget”的秒数。  
-       // args.Add("looktime", 1.1);
+        args.Add("looktime", 1.1);
 
 
         //游戏对象移动的路径可以为Vector3[]或Transform[] 类型。可通过iTweenPath编辑获取路径  
@@ -41,7 +41,7 @@ public class CarMove : MonoBehaviour {
 
         //当包含“path”参数且“orienttopath”为true时，该值用于计算“looktarget”的值，表示游戏物体看着前方点的位置，（百分比，默认0.05）  
         args.Add("lookahead", 100);
-
+        
         //限制仅在指定的轴上旋转  
         args.Add("axis", "z");
         //是否使用局部坐标(默认为false)  

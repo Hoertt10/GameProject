@@ -60,30 +60,35 @@ public class defalue : MonoBehaviour {
                 Debug.Log(QusArr[x]);
             x++;
             if (x >= 3) x = 0;
-
+            //顯示題目為black
 			objlist[Arr-1].GetComponent<SpriteRenderer>().sprite = Resources.Load("Hoertt/black", typeof(Sprite)) as Sprite;
         }
-        //DelayRecover();
+        DelayRecover();
     }
     // Update is called once per frame
 
-   // //呼叫後2秒執行下列程序
-   // IEnumerator delay()
-   // {
-   //     yield return new WaitForSeconds(2);
-   //     //ShowQusStatus = false;
-   //     foreach (int Arr in RandomArr)
-   //     {
-   //         //Debug.Log(Arr);
-			//objlist[Arr-1].GetComponent<SpriteRenderer>().sprite = Resources.Load("Hoertt/white", typeof(Sprite)) as Sprite;
-   //     }
-   //     StartMove. StartObjMove();
-   // }
-   // void DelayRecover()
-   // {
-   //     StartCoroutine("delay");
-   //     //ShowQusStatus = true;
-   // }
+    //呼叫後2秒執行下列程序
+    IEnumerator delay()
+    {
+        //等2秒後
+        yield return new WaitForSeconds(2);
+        //ShowQusStatus = false;
+        //將顯示為black的題目返回至white
+        foreach (int Arr in RandomArr)
+        {
+            //Debug.Log(Arr);
+            objlist[Arr - 1].GetComponent<SpriteRenderer>().sprite = Resources.Load("Hoertt/white", typeof(Sprite)) as Sprite;
+            click.clickopen = true;
+        }
+        //開始移動
+        StartMove.StartObjMove();
+    }
+    //呼叫delay函數
+    void DelayRecover()
+    {
+        StartCoroutine("delay");
+        //ShowQusStatus = true;
+    }
     static bool AnsCover = false;
     public static void AnsList(string name)
     {
@@ -95,10 +100,12 @@ public class defalue : MonoBehaviour {
                 i = 0;
                 AnsCover = true;
             }
+            //若點選超過3個覆蓋最舊的
             if (AnsCover)
             {
 				GameObject.Find(AnsArr[i]).GetComponent<SpriteRenderer>().sprite = Resources.Load("Hoertt/white", typeof(Sprite)) as Sprite;
             }
+            //紀錄
             AnsArr[i] = name;
 			GameObject.Find(AnsArr[i]).GetComponent<SpriteRenderer>().sprite = Resources.Load("Hoertt/chack", typeof(Sprite)) as Sprite;
             i++;
