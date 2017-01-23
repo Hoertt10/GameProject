@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scene/Hoertt/Car.unity
+- path: Assets/Scene/JT/Level1.unity
   isLoaded: 1
   isActive: 1

@@ -6,27 +6,42 @@ using System.Threading;
 
 public class Level2_display : MonoBehaviour
 {
-	[Header ("Object")]
+	[Header ("Object")] 
+	[Tooltip("UIRoot-Panel")]
 	[SerializeField]private GameObject Panel;
+	[Tooltip("BingoIcon")]
 	[SerializeField]private GameObject Bingo;
+	[Tooltip("ErrorIcon")]
 	[SerializeField]private GameObject Error;
 
-	[Header ("List")]
+	[Space(10)]
+
+	[Header ("GameObject")]
+	[Tooltip("亂數序列")]
 	public List<GameObject> Ball_sequence = new List<GameObject> ();
+	[Tooltip("亂數陣列")]
 	public List<GameObject> Ball_Random = new List<GameObject> ();
+	///點擊陣列
 	public static List<GameObject> Ball = new List<GameObject> ();
 
+	[Space(10)]
+
 	[Header ("Material")]
+	[Tooltip("紅")]
 	[SerializeField]private Material Red;
 
 	public static Material TiffanyBlue_static;
+	[Tooltip("青")]
 	[SerializeField]private Material TiffanyBlue;
 
 	public static Material Gray_static;
+	[Tooltip("灰")]
 	[SerializeField]private Material Gray;
 
+	[Space(10)]
+
 	[Header ("LookAt")]
-	//Camera將LookAt的中心點
+	[Tooltip("Camera將LookAt的中心點")]
 	public GameObject Center;
 
 

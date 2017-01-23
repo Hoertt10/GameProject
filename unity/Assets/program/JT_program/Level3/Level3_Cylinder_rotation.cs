@@ -76,6 +76,7 @@ public class Level3_Cylinder_rotation : MonoBehaviour
 			EditorGUILayout.PropertyField (Anchor, true);
 
 			//DrawDefaultInspector ();// show the default inspector so we can set some values
+
 		}
 
 

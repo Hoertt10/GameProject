@@ -7,15 +7,18 @@ public class Level2_Cylinder_rotation : MonoBehaviour
 {
 
 	[Header ("Object")]
+	[Tooltip("Cylinder物件")]
 	[SerializeField]private GameObject Cylinder;
 	[SerializeField]private List<GameObject> Anchor = new List<GameObject> ();
 
 
 	[Header ("Status")]
 	[Range (0, 10)]
+	[Tooltip("Cylinder轉速")]
 	public int Cylinder_speed = 5;
 
 	[Range (0, 10)]
+	[Tooltip("Anchor轉速")]
 	public int Anchor_speed = 5;
 
 	[Header ("ShowLight")]
