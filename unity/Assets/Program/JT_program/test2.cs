@@ -1929,5 +1929,608 @@ public class level2test1 : MonoBehaviour
 
 }
 
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+public class Level1_Display : MonoBehaviour
+{
+
+	[SerializeField]private GameObject Panel;
+	[SerializeField]private GameObject prefab;
+
+	//設定UFO
+	[SerializeField]private GameObject UFO_0;
+	[SerializeField]private GameObject UFO_1;
+	[SerializeField]private GameObject UFO_2;
+
+	//設定Bingo,Error圖
+	[SerializeField]private GameObject Bingo;
+	[SerializeField]private GameObject Error;
+
+	//Timer物件
+	[SerializeField]private Level1_Timer timer;
+
+	///UFO移動至下方X軸之位置
+	public static int ReferencePoint = -200;
+
+	///UFO間隔
+	public static int interval = 200;
+
+	///UFO發光時間
+	private float time = -5;
+
+	///點擊UFO陣列，依序放入點擊UFO
+	public static List<GameObject> UFO = new List<GameObject> ();
+
+	///亂數UFO陣列，與點擊UFO比對
+	public static List<GameObject> RandomUFO = new List<GameObject> ();
+
+
+	///比對開關
+	bool compare = true;
+
+	//亂數元素
+	int[] sequence = new int[3];
+	int[] RandomArr = new int[3];
+
+
+	//點擊事件
+	public class ClickEvent
+	{
+		public static int j = -1;
+		//BoxCollider開關
+		public void Action (GameObject obj)
+		{
+			Debug.Log (obj.name);
+
+			if (obj.GetComponent<Level1_Listener> ().op) {
+
+				obj.GetComponent<TweenPosition> ().from = new Vector3 (ReferencePoint, -316, 0);
+				obj.GetComponent<TweenPosition> ().to = obj.transform.localPosition;
+				ReferencePoint += interval;
+				UFO.Add (obj);
+
+				switch (j) {
+				case 0:
+					UFO [0].GetComponent<BoxCollider> ().enabled = false;
+					break;
+				case 1:
+					UFO [1].GetComponent<BoxCollider> ().enabled = false;
+					break;
+				case 2:
+					UFO [2].GetComponent<BoxCollider> ().enabled = false;
+					break;
+				}
+
+				j++;
+				obj.GetComponent<Level1_Listener> ().op = false;
+
+			} else {
+				ReferencePoint -= interval;
+				obj.GetComponent<Level1_Listener> ().op = true;
+				j--;
+				switch (j) { 
+				case 0:
+					UFO [0].GetComponent<BoxCollider> ().enabled = true;
+					break;
+				case 1:
+					UFO [1].GetComponent<BoxCollider> ().enabled = true;
+					break;
+				case 2:
+					UFO [2].GetComponent<BoxCollider> ().enabled = true;
+					break;
+				}
+				UFO.Remove (obj);
+			}
+		}
+	}
+
+	void Start ()
+	{
+		//NGUITools.AddChild (Panel,prefab);
+
+		//製作亂數
+		makeRandomArr ();
+
+		//Listener每個UFO
+		UIEventListener.Get (UFO_0).onClick = new ClickEvent ().Action;
+		UIEventListener.Get (UFO_1).onClick = new ClickEvent ().Action;
+		UIEventListener.Get (UFO_2).onClick = new ClickEvent ().Action;
+//      UIEventListener.Get (GameObject.Find ("UFO-0")).onClick = new Display.ClickEvent ().Action;
+	}
+
+	public enum UFO_redlight : int
+	{
+		ufo0 = 0,
+		ufo1 = 1,
+		ufo2 = 2,
+		ufo3 = 3,
+		ufo4 = 4,
+		ufo0_red = 5,
+		ufo1_red = 6,
+		ufo2_red = 7,
+		ufo3_red = 8,
+		ufo4_red = 9,
+	}
+
+	bool LightToggle = true;
+
+	void LightToggleOp ()
+	{
+		LightToggle = true;
+	}
+
+	void UFOLight (int i)
+	{
+		if (LightToggle) {
+			switch (i) {
+			case 1:
+				GameObject.Find ("UFO-" + RandomArr [0]).GetComponent<UITexture> ().mainTexture = Resources.Load<Texture> ("JT/UFO_light/" + (UFO_redlight)5);
+				GameObject.Find ("ProgressBar").GetComponent<Level1_Timer> ().enabled = true;
+				RandomUFO.Add (GameObject.Find ("UFO-" + RandomArr [0]));
+				LightToggle = false;
+				Invoke ("LightToggleOp", 1f);
+				timer.TimeReset ();
+				break;
+			case 2:
+				GameObject.Find ("UFO-" + RandomArr [1]).GetComponent<UITexture> ().mainTexture = Resources.Load<Texture> ("JT/UFO_light/" + (UFO_redlight)5);
+				GameObject.Find ("UFO-" + RandomArr [0]).GetComponent<UITexture> ().mainTexture = Resources.Load<Texture> ("JT/UFO_light/" + (UFO_redlight)0);
+				RandomUFO.Add (GameObject.Find ("UFO-" + RandomArr [1]));
+				LightToggle = false;
+				Invoke ("LightToggleOp", 1f);
+				break;
+			case 3:
+				GameObject.Find ("UFO-" + RandomArr [2]).GetComponent<UITexture> ().mainTexture = Resources.Load<Texture> ("JT/UFO_light/" + (UFO_redlight)5);
+				GameObject.Find ("UFO-" + RandomArr [1]).GetComponent<UITexture> ().mainTexture = Resources.Load<Texture> ("JT/UFO_light/" + (UFO_redlight)0);
+				RandomUFO.Add (GameObject.Find ("UFO-" + RandomArr [2]));
+				LightToggle = false;
+				Invoke ("LightToggleOp", 1f);
+				break;
+			case 4:
+				GameObject.Find ("UFO-" + RandomArr [2]).GetComponent<UITexture> ().mainTexture = Resources.Load<Texture> ("JT/UFO_light/" + (UFO_redlight)0);
+				OpenBoxCollider ();
+				break;
+			}
+		}
+	}
+
+
+	void Update ()
+	{
+
+		//UFO發光
+		time += Time.deltaTime;
+		UFOLight (Mathf.CeilToInt (time));
+
+		if (UFO.Count == 3 && compare) 
+		{
+			//比對陣列是否一致
+			if (UFO.SequenceEqual (RandomUFO))
+			{
+				//答對
+				GameObject clone = NGUITools.AddChild (Panel, Bingo);
+				clone.transform.localScale = new Vector3 (140, 140, 0);
+				iTween.ScaleFrom (clone, iTween.Hash ("scale", Vector3.zero, "delay", 0.2, "oncomplete", "DestroyClone", "oncompletetarget", gameObject, "oncompleteparams", clone));
+				timer.pause ();
+			} else
+			
+			{
+				//答錯
+				GameObject clone = NGUITools.AddChild (Panel, Error);
+				clone.transform.localScale = new Vector3 (140, 140, 0);
+				iTween.ScaleFrom (clone, iTween.Hash ("scale", Vector3.zero, "delay", 0.2, "oncomplete", "DestroyClone", "oncompletetarget", gameObject, "oncompleteparams", clone));
+				timer.pause ();
+			}
+			compare = false;
+			Invoke ("restart", 1f);
+		}
+	}
+
+
+
+
+	//設定Tween數值
+	public void OpenBoxCollider ()
+	{
+		GameObject[] target;
+		target = GameObject.FindGameObjectsWithTag ("UFO");
+		for (int i = 0; i <= 2; i++) {
+			target [i].GetComponent<BoxCollider> ().enabled = true;
+			target [i].GetComponent<TweenPosition> ().duration = 0.5f;
+			target [i].GetComponent<TweenPosition> ().delay = 0f;
+		}
+	}
+
+	//製作RandomArr陣列
+	void makeRandomArr ()
+	{
+		for (int i = 0; i < RandomArr.Length; i++)
+		{
+			sequence [i] = i;
+		}
+
+		int end = RandomArr.Length - 1;
+
+		for (int i = 0; i < RandomArr.Length; i++) 
+		{
+			int num = Random.Range (0, end + 1);
+			RandomArr [i] = sequence [num];
+			sequence [num] = sequence [end];
+			end--;
+		}
+	}
+		
+	//顯示RandomArr陣列
+	public void ShowRandom ()
+	{
+		foreach (int Arr in RandomArr)
+			Debug.Log (Arr);
+	}
+
+	//顯示點擊UFO陣列
+	public void ShowClickUFO ()
+	{
+		foreach (GameObject obj in UFO)
+			Debug.Log (obj.name);
+	}
+
+	//顯示亂數UFO陣列
+	public void ShowRandomUFO ()
+	{
+		foreach (GameObject obj in RandomUFO)
+			Debug.Log (obj.name);
+	}
+
+
+	void DestroyClone (GameObject obj)
+	{
+		Destroy (obj);
+		timer.rezero ();
+	}
+
+
+	public void restart ()
+	{
+		//重製UFO發光時間
+		time = -2;
+
+		//使前後亂數不同
+		int[] check = (int[])RandomArr.Clone ();
+		makeRandomArr ();
+		if (RandomArr.SequenceEqual (check))
+			makeRandomArr ();
+
+		//重製UFO位置
+		for (int i = 2; i >= 0; i--) {
+			UFO [i].GetComponent<UIPlayTween> ().Play (true);
+			UFO [i].GetComponent<Level1_Listener> ().op = true;
+			UFO [i].GetComponent<BoxCollider> ().enabled = false;
+		}
+
+		//重製方X軸之位置
+		ReferencePoint = -200;
+
+		//清空點擊UFO陣列
+		UFO.Clear ();
+
+		//清空亂數UFO陣列
+		RandomUFO.Clear ();
+
+
+		//重製BoxCollider開關
+		ClickEvent.j = -1;
+		 
+		//判斷RandomUFO與UFO 開關
+		compare = true;
+	
+	}
+}
+
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
+
+public class Level1_Display : MonoBehaviour
+{
+	[Header ("Object")]
+	[Tooltip ("UIRoot-Panel")]
+	[SerializeField]protected GameObject Panel;
+	[Tooltip ("BingoIcon")]
+	[SerializeField]protected GameObject Bingo;
+	[Tooltip ("ErrorIcon")]
+	[SerializeField]protected GameObject Error;
+
+	[Space (10)]
+
+	[Header ("GameObject")]
+	[Tooltip ("亂數序列")]
+	public List<GameObject> UFO_sequence = new List<GameObject> ();
+	[Tooltip ("亂數陣列")]
+	public List<GameObject> UFO_Random = new List<GameObject> ();
+	///點擊陣列
+	public static List<GameObject> UFO = new List<GameObject> ();
+
+	///比對開關
+	protected bool compare = true;
+
+	///UFO移動至下方X軸之位置
+	public static int ReferencePoint = -200;
+
+	///UFO間隔
+	public static int interval = 200;
+
+	/// UFO指標
+	public static int UFO_Arr = 0;
+
+
+	float time = 1f;
+
+
+	//點擊事件
+	public class ClickEvent
+	{
+		public static int j = -1;
+		//BoxCollider開關
+		public void Action (GameObject obj)
+		{
+			Debug.Log (obj.name);
+
+			//掛上<Level1_Listener>腳本
+			if (!obj.GetComponent<Level1_Listener> ())
+				obj.AddComponent<Level1_Listener> ();
+
+			//讓UFO能返回上一步
+			if (obj.GetComponent<Level1_Listener> ().op) {
+				//修改NGUI數值
+				obj.GetComponent<TweenPosition> ().from = new Vector3 (ReferencePoint, -316, 0);
+				obj.GetComponent<TweenPosition> ().to = obj.transform.localPosition;
+				//指向下一個位置
+				ReferencePoint += interval;
+				//加入UFO陣列
+				UFO.Add (obj);
+
+				switch (j) {
+				case 0:
+					UFO [0].GetComponent<BoxCollider> ().enabled = false;
+					break;
+				case 1:
+					UFO [1].GetComponent<BoxCollider> ().enabled = false;
+					break;
+				case 2:
+					UFO [2].GetComponent<BoxCollider> ().enabled = false;
+					break;
+				case 3:
+					UFO [3].GetComponent<BoxCollider> ().enabled = false;
+					break;
+				}
+
+				j++;
+				obj.GetComponent<Level1_Listener> ().op = false;
+
+			} else {
+				//指向上一個位置
+				ReferencePoint -= interval;
+				obj.GetComponent<Level1_Listener> ().op = true;
+				j--;
+				switch (j) { 
+				case 0:
+					UFO [0].GetComponent<BoxCollider> ().enabled = true;
+					break;
+				case 1:
+					UFO [1].GetComponent<BoxCollider> ().enabled = true;
+					break;
+				case 2:
+					UFO [2].GetComponent<BoxCollider> ().enabled = true;
+					break;
+				case 3:
+					UFO [3].GetComponent<BoxCollider> ().enabled = true;
+					break;
+				}
+				//從UFO陣列移除
+				UFO.Remove (obj);
+			}
+		}
+	}
+
+	void Start ()
+	{
+		//設定初始值
+		Initialization ();
+
+		//製作亂數
+		makeRandomArr (3);
+
+		//Listen所有UFO
+		UFO_Random.ForEach (i => UIEventListener.Get (i).onClick = new ClickEvent ().Action);
+
+		//調用ShowLight方法 5秒後 1秒1次
+		InvokeRepeating ("ShowLight", 5f, 1f);
+
+	}
+
+	void Update ()
+	{
+		AnswerCompare ();
+	}
+
+	public virtual void Initialization ()
+	{
+		Panel = GameObject.Find ("Panel");
+		Bingo = Resources.Load<GameObject> ("JT/" + "checked-Bingo");
+		Error = Resources.Load<GameObject> ("JT/" + "checked-Error");
+		GameObject.Find ("UFO-3").SetActive (false);
+		GameObject.Find ("UFO-4").SetActive (false);
+
+		for (int i = 0; i < 3; i++) {
+			UFO_sequence.Add (GameObject.Find ("UFO-" + i));
+		}
+	}
+
+	protected void AnswerCompare ()
+	{
+		if (UFO.Count == UFO_Random.Count && compare) {
+			//比對陣列是否一致
+			if (UFO.SequenceEqual (UFO_Random)) {
+				//答對
+				GameObject clone = NGUITools.AddChild (Panel, Bingo);
+				clone.transform.localScale = new Vector3 (140, 140, 0);
+				iTween.ScaleFrom (clone, iTween.Hash ("scale", Vector3.zero, "delay", 0.2, "oncomplete", "DestroyClone", "oncompletetarget", gameObject, "oncompleteparams", clone));
+				//				timer.pause ();
+				Debug.Log ("yes");
+			} else {
+				//答錯
+				GameObject clone = NGUITools.AddChild (Panel, Error);
+				clone.transform.localScale = new Vector3 (140, 140, 0);
+				iTween.ScaleFrom (clone, iTween.Hash ("scale", Vector3.zero, "delay", 0.2, "oncomplete", "DestroyClone", "oncompletetarget", gameObject, "oncompleteparams", clone));
+				//				timer.pause ();
+				Debug.Log ("no");
+			}
+
+			//關閉比較開關,使不會重複進行比對判斷
+			compare = false;
+
+			//1秒後調用restart()
+			Invoke ("restart", 1f);
+		}
+	}
+
+
+	protected void ShowLight ()
+	{
+		try {
+			if (UFO_Arr == UFO_Random.Count) {
+				//停止Invoke
+				CancelInvoke ("ShowLight");
+				//關閉最後一個燈
+				UFO_Random [UFO_Random.Count - 1].GetComponent<UITexture> ().mainTexture = Resources.Load<Texture> ("JT/UFO_light/ufo0");	
+				//開啟Collider
+				OpenBoxCollider ();
+			} else {
+				if (UFO_Arr != 0) {
+					//亮下一個燈
+					UFO_Random [UFO_Arr].GetComponent<UITexture> ().mainTexture = Resources.Load<Texture> ("JT/UFO_light/ufo0_red");
+					//關比上一個燈
+					UFO_Random [UFO_Arr - 1].GetComponent<UITexture> ().mainTexture = Resources.Load<Texture> ("JT/UFO_light/ufo0");
+				} else {
+					//UFO_Arr == 0 亮第一個燈
+					UFO_Random [UFO_Arr].GetComponent<UITexture> ().mainTexture = Resources.Load<Texture> ("JT/UFO_light/ufo0_red");
+				}
+			}
+
+			//指向下一個
+			UFO_Arr++;
+				
+		} catch (System.Exception e) {
+			Debug.Log ("ShowLight_fail");
+		}
+		
+		//timer.TimeReset ();
+		//OpenBoxCollider ();
+		//GameObject.Find ("ProgressBar").GetComponent<Level1_Timer> ().enabled = true;
+	}
+
+
+	//設定Tween數值
+	public void OpenBoxCollider ()
+	{
+		GameObject[] target;
+		target = GameObject.FindGameObjectsWithTag ("UFO");
+		target.Select (i => i.GetComponent<BoxCollider> ().enabled = true).ToArray ();
+
+		//修改NGUI數值
+		target.Select (i => i.GetComponent<TweenPosition> ().duration = 0.5f).ToArray ();
+		target.Select (i => i.GetComponent<TweenPosition> ().delay = 0f).ToArray ();
+	}
+
+	//製作RandomArr陣列
+	protected void makeRandomArr (int key)
+	{
+		//設定亂數種子
+		Random.InitState (System.Guid.NewGuid().GetHashCode());
+
+		for (int i = 0; i < key; i++) {
+			int num = Random.Range (0, UFO_sequence.Count);
+			UFO_Random.Add (UFO_sequence [num]);
+			UFO_sequence [num] = UFO_sequence [UFO_sequence.Count - 1];
+			UFO_sequence.RemoveAt (UFO_sequence.Count - 1);
+		}
+	}
+		
+	//顯示UFO_Random陣列
+	public void ShowUFO_Random ()
+	{
+		UFO_Random.ForEach (i => Debug.Log (i.name));
+	}
+
+	//顯示UFO陣列
+	public void ShowUFO ()
+	{
+		UFO.ForEach (i => Debug.Log (i.name));
+	}
+
+
+	//用來Destroy Bingo、Error物件
+	void DestroyClone (GameObject obj)
+	{
+		Destroy (obj);
+//			timer.rezero ();
+	}
+
+
+	protected void restart ()
+	{
+
+		//重製UFO位置
+		foreach (GameObject i in UFO) {
+			//執行UIPlayTween
+			i.GetComponent<UIPlayTween> ().Play (true);
+			i.GetComponent<Level1_Listener> ().op = true;
+			//關閉所有BoxCollider
+			i.GetComponent<BoxCollider> ().enabled = false;
+		}
+
+		//指標歸零
+		UFO_Arr = 0;
+
+		// This will copy all the items from Ball_Random to Ball_sequence
+		UFO_sequence.AddRange (UFO_Random);
+
+		//清空UFO陣列
+		UFO.Clear ();
+
+		//清空UFO_Random陣列
+		UFO_Random.Clear ();
+
+		//使前後亂數不同
+		MakeDifference ();
+
+
+		//重製方X軸之位置
+		ReferencePoint = -200;
+
+		//調用ShowLight方法 5秒後 1秒1次
+		InvokeRepeating ("ShowLight", 1f, time);
+		if(time >0.2f)
+		time -= 0.2f;
+
+		//重製BoxCollider開關
+		ClickEvent.j = -1;
+		 
+		//判斷RandomUFO與UFO 開關
+		compare = true;
+	}
+
+	protected virtual void MakeDifference ()
+	{
+		List<GameObject> check = UFO_Random.ToList ();
+		makeRandomArr (3);
+		if (UFO_Random.SequenceEqual (check))
+			makeRandomArr (3);
+	}
+}
 
 */

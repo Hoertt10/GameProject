@@ -1,0 +1,175 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEditor;
+using System.Linq;
+
+
+public class Level1_Select : MonoBehaviour
+{
+
+	public int radio = 0;
+
+	public int item = 5;
+
+	public static int _item;
+
+	public  float[] floatFieldLeft = new float[15];
+
+	public  static List<float> _floatFieldLeft = new List<float> ();
+
+
+	public  float[] floatFieldRight = new float[15];
+
+	public  static List<float> _floatFieldRight = new List<float> ();
+
+
+	void swap (float small, float big, string Key)
+	{
+		if (Key == "L") {
+			floatFieldLeft [0] = big;
+			floatFieldLeft [item - 1] = small;
+		}
+
+
+		if (Key == "R") {
+			floatFieldRight [0] = big;
+			floatFieldRight [item - 1] = small;
+		}
+	}
+
+
+	[CustomEditor (typeof(Level1_Select))]
+	public class Level1_Select_Editor : Editor
+	{
+		public override void OnInspectorGUI ()
+		{
+		
+			Level1_Select edit = target as Level1_Select;
+
+			GUILayout.Space (10);
+
+			EditorGUILayout.BeginHorizontal ();
+
+//			edit.radio = GUILayout.SelectionGrid (edit.radio, new string[]{ "Easy", "Normal", "Hard" }, 3, EditorStyles.boldLabel);
+			edit.radio = GUILayout.Toolbar (edit.radio, new string[]{ "Easy", "Normal", "Hard" });
+
+			EditorGUILayout.EndHorizontal ();
+
+			GUILayout.Space (15);
+
+			EditorGUILayout.BeginHorizontal ();
+			if (GUILayout.Button ("X", GUILayout.Width (30))){
+				
+				edit.item = 0;
+
+
+			}
+			GUILayout.Space (50);
+			GUILayout.Label ("亮燈時間");
+			GUILayout.Space (10);
+			GUILayout.Label ("間隔");
+
+			EditorGUILayout.EndHorizontal ();
+
+
+			for (int i = 0; i < edit.item; i++) {
+				
+				EditorGUILayout.BeginHorizontal ();
+
+				if (GUILayout.Button ("Re", GUILayout.Width (30), GUILayout.Height (20))) {
+					
+					edit.floatFieldLeft [i] = 0;
+
+					edit.floatFieldRight [i] = 0;
+				}
+
+			
+
+				GUILayout.Label (i + ":");
+
+
+				edit.floatFieldLeft [i] = EditorGUILayout.FloatField (edit.floatFieldLeft [i]);
+
+				edit.floatFieldRight [i] = EditorGUILayout.FloatField (edit.floatFieldRight [i]);
+
+				EditorGUILayout.EndHorizontal ();
+			}
+
+			EditorGUILayout.BeginHorizontal ();
+
+
+			if (GUILayout.Button ("+", GUILayout.Width (23)))
+				edit.item++;
+
+			if (GUILayout.Button ("-", GUILayout.Width (23)))
+				edit.item--;
+
+
+
+
+		
+			if (GUILayout.Button ("分配")) {
+				//edit.floatFieldLeft.GetUpperBound(0) = edit.floatFieldLeft.Length-1
+				if (edit.floatFieldLeft [0] < edit.floatFieldLeft [edit.item - 1]) {
+					edit.swap (edit.floatFieldLeft [0], edit.floatFieldLeft [edit.item - 1], "L");
+				}
+
+				float d = (edit.floatFieldLeft [0] - edit.floatFieldLeft [edit.item - 1]) / (edit.item - 1);
+				for (int i = 0; i < edit.item - 1; i++) {
+					edit.floatFieldLeft [i] = edit.floatFieldLeft [0] - i * d;
+				}
+			}
+
+			if (GUILayout.Button ("分配")) {
+				if (edit.floatFieldRight [0] < edit.floatFieldRight [edit.item - 1]) {
+					edit.swap (edit.floatFieldRight [0], edit.floatFieldRight [edit.item - 1], "R");
+				}
+
+				float d = (edit.floatFieldRight [0] - edit.floatFieldRight [edit.item - 1]) / (edit.item - 1);
+				for (int i = 0; i < edit.item - 1; i++) {
+					edit.floatFieldRight [i] = edit.floatFieldRight [0] - i * d;
+				}
+			}
+
+			EditorGUILayout.EndHorizontal ();
+
+		}
+	}
+
+	void Start ()
+	{
+		//選擇掛載難度
+		switch (radio) {
+		case 0:
+			gameObject.AddComponent<Level1_Display> ();
+			break;
+		case 1:
+			gameObject.AddComponent<Level1_Display_Normal> ();
+			break;
+		case 2:
+			gameObject.AddComponent<Level1_Display_Hard> ();
+			break;
+		}
+
+
+		_item = item;
+
+		//將floatFieldLeft複製到_floatFieldLeft
+		_floatFieldLeft.AddRange (floatFieldLeft);
+	
+		//將ffloatFieldRight複製到_floatFieldRight
+		_floatFieldRight.AddRange (floatFieldRight);
+
+	}
+
+	void Update ()
+	{
+		Debug.Log (item);
+	}
+
+	public void GameStart ()
+	{
+		Level1_Display.ready = true;
+	}
+}
