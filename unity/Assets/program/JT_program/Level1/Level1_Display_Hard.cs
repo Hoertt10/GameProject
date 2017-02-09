@@ -3,23 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Level1_Display_Hard : Level1_Display {
+public class Level1_Display_Hard : Level1_Display
+{
 
-	void Start () {
+	void Start ()
+	{
 		//初始化
 		Initialization ();
 
 		makeRandomArr (5);
 
 		UFO_Random.ForEach (i => UIEventListener.Get (i).onClick = new ClickEvent ().Action);
+
+		//持續比對答案
+		StartCoroutine (AnswerCompare ());
 	}
 
-	public override void Initialization(){
+	public override void Initialization ()
+	{
 		Panel = GameObject.Find ("Panel");
 		Bingo = Resources.Load<GameObject> ("JT/" + "checked-Bingo");
 		Error = Resources.Load<GameObject> ("JT/" + "checked-Error");
 
-		for(int i=0;i<5;i++){
+		for (int i = 0; i < 5; i++) {
 			UFO_sequence.Add (GameObject.Find ("UFO-" + i));
 		}
 	}
@@ -33,8 +39,9 @@ public class Level1_Display_Hard : Level1_Display {
 			makeRandomArr (5);
 	}
 
-	void Update () {
-		AnswerCompare ();
+	void Update ()
+	{
+		
 	}
 
 }

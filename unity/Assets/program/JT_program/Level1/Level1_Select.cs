@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System.Linq;
-
 
 public class Level1_Select : MonoBehaviour
 {
@@ -14,14 +12,20 @@ public class Level1_Select : MonoBehaviour
 
 	public static int _item;
 
-	public  float[] floatFieldLeft = new float[15];
+	public  float[] floatFieldLeft;
 
 	public  static List<float> _floatFieldLeft = new List<float> ();
 
 
-	public  float[] floatFieldRight = new float[15];
+	public  float[] floatFieldRight;
 
 	public  static List<float> _floatFieldRight = new List<float> ();
+
+
+	public  int arrangement_index;
+
+	public static int _arrangement_index;
+
 
 
 	void swap (float small, float big, string Key)
@@ -38,13 +42,12 @@ public class Level1_Select : MonoBehaviour
 		}
 	}
 
-
 	[CustomEditor (typeof(Level1_Select))]
 	public class Level1_Select_Editor : Editor
 	{
 		public override void OnInspectorGUI ()
 		{
-		
+			
 			Level1_Select edit = target as Level1_Select;
 
 			GUILayout.Space (10);
@@ -59,11 +62,38 @@ public class Level1_Select : MonoBehaviour
 			GUILayout.Space (15);
 
 			EditorGUILayout.BeginHorizontal ();
-			if (GUILayout.Button ("X", GUILayout.Width (30))){
-				
+
+
+			GUILayout.Label ("排列圖", GUILayout.Width (40));
+		
+			edit.arrangement_index = EditorGUILayout.IntField (edit.arrangement_index);
+
+			//只有數值變化時執行
+			if (GUI.changed) {
+				Debug.Log ("value change");
+			}
+
+			if (GUILayout.Button ("Re", GUILayout.Width (30))) {
+				edit.arrangement_index = 0;
+			}
+
+			if (GUILayout.Button ("+", GUILayout.Width (30))) {
+				edit.arrangement_index++;///要設計最大不可超過值
+			}
+			if (GUILayout.Button ("-", GUILayout.Width (30))) {
+				if (edit.arrangement_index > 0) {
+					edit.arrangement_index--;
+				}
+			}
+
+			EditorGUILayout.EndHorizontal ();
+
+
+			GUILayout.Space (15);
+
+			EditorGUILayout.BeginHorizontal ();
+			if (GUILayout.Button ("X", GUILayout.Width (30))) {
 				edit.item = 0;
-
-
 			}
 			GUILayout.Space (50);
 			GUILayout.Label ("亮燈時間");
@@ -83,9 +113,6 @@ public class Level1_Select : MonoBehaviour
 
 					edit.floatFieldRight [i] = 0;
 				}
-
-			
-
 				GUILayout.Label (i + ":");
 
 
@@ -134,6 +161,7 @@ public class Level1_Select : MonoBehaviour
 
 			EditorGUILayout.EndHorizontal ();
 
+
 		}
 	}
 
@@ -161,11 +189,14 @@ public class Level1_Select : MonoBehaviour
 		//將ffloatFieldRight複製到_floatFieldRight
 		_floatFieldRight.AddRange (floatFieldRight);
 
+		_arrangement_index = arrangement_index;
+
+
 	}
 
 	void Update ()
 	{
-		Debug.Log (item);
+		_arrangement_index = arrangement_index;
 	}
 
 	public void GameStart ()

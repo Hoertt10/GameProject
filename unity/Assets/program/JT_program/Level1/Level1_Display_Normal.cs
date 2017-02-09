@@ -15,6 +15,9 @@ public class Level1_Display_Normal : Level1_Display
 		makeRandomArr (4);
 
 		UFO_Random.ForEach (i => UIEventListener.Get (i).onClick = new ClickEvent ().Action);
+
+		//持續比對答案
+		StartCoroutine (AnswerCompare ());
 	}
 
 	public override void Initialization ()
@@ -40,6 +43,6 @@ public class Level1_Display_Normal : Level1_Display
 
 	void Update ()
 	{
-		AnswerCompare ();
+		
 	}
 }

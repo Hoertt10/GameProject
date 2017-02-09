@@ -91,7 +91,7 @@ public class HoresMove : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.name != "horse1" && collision.gameObject.name != "horse2" && collision.gameObject.name != "horse3")
-        {
+        {			
             if (turn == true && collision.gameObject.name == "Wall_Left" )
             {
                 sortorder = 0;
