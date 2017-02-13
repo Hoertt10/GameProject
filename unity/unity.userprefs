@@ -1,19 +1,8 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\program\JT_program\Thread\Thread_0.cs">
+﻿<Properties StartupItem="unity.Plugins.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Program\Hoertt_program\CarLoop\CarMove.cs">
     <Files>
-<<<<<<< HEAD
-      <File FileName="Assets\Program\JT_program\Level1\Level1_Display.cs" Line="1" Column="1" />
-      <File FileName="Assets\Program\JT_program\test2.cs" Line="1" Column="1" />
-      <File FileName="Assets\Program\JT_program\Level2\Level2_display.cs" Line="110" Column="4" />
-      <File FileName="Assets\program\JT_program\Level2\Level2_Cylinder_rotation.cs" Line="1" Column="1" />
-      <File FileName="Assets\NGUI\Scripts\Internal\UIEventListener.cs" Line="1" Column="1" />
-=======
-      <File FileName="Assets\Program\JT_program\test2.cs" Line="1" Column="1" />
-      <File FileName="Assets\program\JT_program\Level2\Level2_Cylinder_rotation.cs" Line="1" Column="1" />
-      <File FileName="Assets\program\JT_program\Thread\Thread_0.cs" Line="20" Column="12" />
-      <File FileName="Assets\Program\JT_program\Level2\Level2_display.cs" Line="1" Column="1" />
->>>>>>> mix
+      <File FileName="Assets\Program\Hoertt_program\CarLoop\CarMove.cs" Line="76" Column="26" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

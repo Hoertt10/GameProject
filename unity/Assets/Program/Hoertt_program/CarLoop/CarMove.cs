@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CarMove : MonoBehaviour {
 
+    private Vector3 LastPos, NowPos, CountPos;
 	// Use this for initialization
 	void Start () {
         //键值对儿的形式保存iTween所用到的参数  
@@ -24,12 +25,13 @@ public class CarMove : MonoBehaviour {
         //args.Add("delay", 0.1f);
 
         //是否让游戏对象始终面朝路径行进的方向，拐弯的地方会自动旋转。  
-        args.Add("orienttopath", true);
+        args.Add("orienttopath", false);
         //移动的过程中面朝一个点，当“orienttopath”为true时该参数失效 
          
        // args.Add("looktarget", Vector3.zero);
         //游戏对象看向“looktarget”的秒数。  
-        args.Add("looktime", 1.1);
+        //args.Add("looktime", 1.1);
+
 
 
         //游戏对象移动的路径可以为Vector3[]或Transform[] 类型。可通过iTweenPath编辑获取路径  
@@ -41,14 +43,14 @@ public class CarMove : MonoBehaviour {
 
         //当包含“path”参数且“orienttopath”为true时，该值用于计算“looktarget”的值，表示游戏物体看着前方点的位置，（百分比，默认0.05）  
         args.Add("lookahead", 100);
-        
+
         //限制仅在指定的轴上旋转  
         args.Add("axis", "z");
         //是否使用局部坐标(默认为false)  
         args.Add("islocal", false);
 
 
-        args.Add("oncomplete", "AnimationEnd");
+        args.Add("oncomplete", "Animatio    nEnd");
         args.Add("oncompleteparams", "end");
         args.Add("oncompletetarget", gameObject);
         //三个循环类型 none loop pingPong (一般 循环 来回)    
@@ -66,6 +68,16 @@ public class CarMove : MonoBehaviour {
     }
     // Update is called once per frame
     void Update () {
-		
-	}
+        LastPos = NowPos;
+        NowPos = transform.localPosition;
+        CountPos.x = LastPos.x - NowPos.x;
+        CountPos.y = LastPos.y - NowPos.y;
+        float angle = Mathf.Atan2(CountPos.y, CountPos.x)*(180/Mathf.PI);
+        transform.rotation = Quaternion.Euler(0f, 0f, angle+90);
+        //transform.Rotate(new Vector3(0, 0, angle));
+        Debug.Log("x:"+CountPos.x);
+        Debug.Log("y:" + CountPos.y);
+
+
+    }
 }

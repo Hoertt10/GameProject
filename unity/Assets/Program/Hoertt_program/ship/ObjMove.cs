@@ -8,9 +8,6 @@ public class ObjMove : MonoBehaviour
     private float timer; //for record time
     private  Vector3 pos; //initial position
     private int count = 0;
-    private int turn = 1;
-    //private static GameObject Rotaship =  GameObject.Find("ShipRotaPoint");
-    //private GameObject ShipRotaPoint = Rotaship.transform.Find("ShipRotaPoint").gameObject;
     // Use this for initialization
     void Start()
     {
@@ -22,42 +19,31 @@ public class ObjMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(Rotaship.transform.position);
-        if (gameObject.transform.localRotation.eulerAngles.z >= 350)
+        //record time
+        timer += 0.03f;
+      //  timer += Time.deltaTime;
+
+        Vector3 rPos = pos;
+        rPos.x = rPos.x + Mathf.Cos(timer) * 50f;
+        rPos.y = rPos.y - Mathf.Abs(Mathf.Sin(timer)) * 70f;
+        
+       
+      //  Debug.Log(timer);
+        //Debug.Log(Mathf.Cos(timer));
+        //update position
+        transform.position = rPos;
+
+        if((int)(Mathf.Cos(timer)*100)==0)
         {
-            turn = 1;
+             count += 1;
+            if(count %3==0)
+            {
+                count = 0;
+                click.clickopen = true;
+
+                gameObject.GetComponent<ObjMove>().enabled = false;
+                }
         }
-        else if (gameObject.transform.localRotation.eulerAngles.z >= 65 )
-        {
-            turn = -1;
-        }
-        Debug.Log(gameObject.transform.localRotation.eulerAngles.z + "   " + turn);
-        gameObject.transform.RotateAround(GameObject.Find("ShipRotaPoint").transform.position, Vector3.forward, turn * 30 * Time.deltaTime);
-        //  //record time
-        //  timer += 0.03f;
-        ////  timer += Time.deltaTime;
-
-        //  Vector3 rPos = pos;
-        //  rPos.x = rPos.x + Mathf.Cos(timer) * 50f;
-        //  rPos.y = rPos.y - Mathf.Abs(Mathf.Sin(timer)) * 70f;
-
-
-        ////  Debug.Log(timer);
-        //  //Debug.Log(Mathf.Cos(timer));
-        //  //update position
-        //  transform.position = rPos;
-
-        //  if((int)(Mathf.Cos(timer)*100)==0)
-        //  {
-        //       count += 1;
-        //      if(count %3==0)
-        //      {
-        //          count = 0;
-        //          click.clickopen = true;
-
-        //          gameObject.GetComponent<ObjMove>().enabled = false;
-        //          }
-        //  }
         /*
         if (timer  >=1)
         {
@@ -68,7 +54,7 @@ public class ObjMove : MonoBehaviour
             }
         }
         */
-
+        
     }
   
 }

@@ -25,7 +25,7 @@ public class Level1_Display : MonoBehaviour
 	public static int ReferencePoint = -200;
 
 	///UFO間隔
-	public static int interval = 200;
+	public static int interval = 2005;
 
 	///UFO發光時間
 	private float time = -5;

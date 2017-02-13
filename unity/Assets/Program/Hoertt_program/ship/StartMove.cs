@@ -26,7 +26,7 @@ public class StartMove : MonoBehaviour
  
     public static void StartObjMove()
     {
-        //click.clickopen = false;
+        click.clickopen = false;
  //       objlist[0].GetComponent<SpriteRenderer>().sprite = Resources.Load("1'", typeof(Sprite)) as Sprite;
  ////       delaytimer();
  //       objlist[1].GetComponent<SpriteRenderer>().sprite = Resources.Load("2'", typeof(Sprite)) as Sprite;
