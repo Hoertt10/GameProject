@@ -23,7 +23,7 @@ public class click : MonoBehaviour {
 	}
 
 	void OnMouseDown(){
-        Debug.Log(clickopen);
+        Debug.Log("click: "+clickopen);
         if (clickopen)
         {
             //show.StaPos(obj.transform.position);
@@ -34,7 +34,7 @@ public class click : MonoBehaviour {
             //Debug.Log(ID);
             //Debug.Log(name);
             name = obj.name;
-            defalue.AnsList(name);
+            Ship_1.AnsList(name);
         }
     }
 }

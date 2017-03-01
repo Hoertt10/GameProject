@@ -29,22 +29,24 @@ public class defalue : MonoBehaviour {
         objlist.Add(GameObject.Find("23"));
         objlist.Add(GameObject.Find("33"));
 
-        makeRandomArr();
+        //makeRandomArr();
         ShowRandom();
 	}
     ///製作隨機亂數
-    void makeRandomArr()
+    void makeRandomArr(int Qusnum,int Randnum)
     {
-        for (int i = 0; i < sequence.Length; i++)
+        int[] RandArr = new int[Qusnum];
+        
+        for (int i = 0; i < RandArr.Length; i++)
         {
-            sequence[i] = i + 1;
+            RandArr[i] = i + 1;
         }
-        int end = sequence.Length - 1;
+        int end = RandArr.Length - 1;
         for (int i = 0; i < QusAmount; i++)
         {
             int num = Random.Range(0, end + 1);
-            RandomArr[i] = sequence[num];
-            sequence[num] = sequence[end];
+            RandomArr[i] = RandArr[num];
+            RandArr[num] = RandArr[end];
             end--;
         }
     }

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public class ObjMove : MonoBehaviour
 {
     //[SerializeField] private List<GameObject> objlist = new List<GameObject>();
-    private float timer; //for record time
-    private  Vector3 pos; //initial position
-    private int count = 0;
+    //private float timer; //for record time
+    //private  Vector3 pos; //initial position
+    //private int count = 0;
     private int turn = 1;
     //private static GameObject Rotaship =  GameObject.Find("ShipRotaPoint");
     //private GameObject ShipRotaPoint = Rotaship.transform.Find("ShipRotaPoint").gameObject;
@@ -15,8 +15,8 @@ public class ObjMove : MonoBehaviour
     void Start()
     {
 
-        timer = 0;
-        pos = transform.position;
+        //timer = 0;
+        //pos = transform.position;
     }
 
     // Update is called once per frame
