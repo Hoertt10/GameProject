@@ -28,3 +28,4 @@ C:\Users\Aron\Desktop\Hoertt10-GameProject\GameProject\unity\Temp\bin\Debug\Unit
 C:\Users\Aron\Desktop\Hoertt10-GameProject\GameProject\unity\obj\Debug\Assembly-CSharp.csprojResolveAssemblyReference.cache
 C:\Users\Aron\Desktop\Hoertt10-GameProject\GameProject\unity\obj\Debug\Assembly-CSharp.dll
 C:\Users\Aron\Desktop\Hoertt10-GameProject\GameProject\unity\obj\Debug\Assembly-CSharp.pdb
+C:\Users\Aron\Desktop\Hoertt10-GameProject\GameProject\unity\Temp\bin\Debug\MonitorComponents.dll

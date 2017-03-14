@@ -106,6 +106,9 @@
  <Reference Include="UnityEngine.VR">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
+ <Reference Include="MonitorComponents">
+ <HintPath>C:/Users/Aron/Desktop/Hoertt10-GameProject/GameProject/unity/Assets/Monitor Components/MonitorComponents.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

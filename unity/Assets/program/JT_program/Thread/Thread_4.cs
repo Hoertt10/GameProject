@@ -39,13 +39,13 @@ public class Thread_4 : MonoBehaviour
 
 	void DoSum ()
 	{
-		for (int n1 = 0; n1 < 7; n1++) {
-			//當目前執行緒執行這個方法時，會鎖住資源，其他執行緒無法存取，直到該執行緒工作完成
-			lock (this) {//this 表示，目前執行緒所在的類別，也就是鎖住這個類別的資源
-				addSum += 2;
-				Thread.Sleep (1);
-				Debug.Log (Thread.CurrentThread.Name + "，執行第 " + n1 + " 次，addSum =" + addSum);
-			}
-		}
+//		for (int n1 = 0; n1 < 7; n1++) {
+//			//當目前執行緒執行這個方法時，會鎖住資源，其他執行緒無法存取，直到該執行緒工作完成
+//			lock (this) {//this 表示，目前執行緒所在的類別，也就是鎖住這個類別的資源
+//				addSum += 2;
+//				Thread.Sleep (1);
+//				Debug.Log (Thread.CurrentThread.Name + "，執行第 " + n1 + " 次，addSum =" + addSum);
+//			}
+//		}
 	}
 }

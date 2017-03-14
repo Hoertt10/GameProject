@@ -5,7 +5,7 @@ using UnityEditor;
 
 public class Level1_Select : MonoBehaviour
 {
-
+	
 	public int radio = 0;
 
 	public int item = 5;
@@ -167,6 +167,7 @@ public class Level1_Select : MonoBehaviour
 
 	void Start ()
 	{
+
 		//選擇掛載難度
 		switch (radio) {
 		case 0:
@@ -194,13 +195,17 @@ public class Level1_Select : MonoBehaviour
 
 	}
 
+
+
 	void Update ()
 	{
 		_arrangement_index = arrangement_index;
+
+		if (Level1_Display.s_bNextLevel || Level1_Display_Normal.s_bNextLevel || Level1_Display_Hard.s_bNextLevel) {
+			arrangement_index++;
+			Level1_Display.s_bNextLevel = false;
+			Level1_Display_Normal.s_bNextLevel = false;
+		}
 	}
 
-	public void GameStart ()
-	{
-		Level1_Display.ready = true;
-	}
 }
