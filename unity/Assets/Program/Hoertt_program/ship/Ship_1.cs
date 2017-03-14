@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Ship_1 : MonoBehaviour {
     [SerializeField]
     private List<GameObject> objlist = new List<GameObject>();
+
+    List<List <Vector3>> Postable = new List<List <Vector3>>();
     static int  Level = 0;
     int turn = 1;
     //GameObject ship = GameObject.Find("ship");
@@ -17,12 +19,14 @@ public class Ship_1 : MonoBehaviour {
     public static string[] QusArr,AnsArr;
     float ShipMoveSp;
 
+    Vector3[] LV1Vec3 = new Vector3[3];
+
     static int Score = 0;
     static bool Anstatus = true,DelayStatus=false;
     // Use this for initialization
     void Start () {
-        
-        //初始化
+
+                //初始化
         Initialization();
         StartCoroutine(delay());
     }
@@ -30,22 +34,37 @@ public class Ship_1 : MonoBehaviour {
     //傳入變數SP,Qusnum,Rannum
     public  virtual void Initialization()
     {
-            objlist.Clear();
-            objlist.Add(GameObject.Find("11"));
-            objlist.Add(GameObject.Find("21"));
-            objlist.Add(GameObject.Find("31"));
-            objlist.Add(GameObject.Find("12"));
-            objlist.Add(GameObject.Find("22"));
-            objlist.Add(GameObject.Find("32"));
-            objlist.Add(GameObject.Find("13"));
-            objlist.Add(GameObject.Find("23"));
-            objlist.Add(GameObject.Find("33"));
+        objlist.Clear();
+        objlist.Add(GameObject.Find("11"));
+        objlist.Add(GameObject.Find("21"));
+        objlist.Add(GameObject.Find("31"));//foreach
+        objlist.Add(GameObject.Find("12"));
+        objlist.Add(GameObject.Find("22"));
+        objlist.Add(GameObject.Find("32"));
+        objlist.Add(GameObject.Find("13"));
+        objlist.Add(GameObject.Find("23"));
+        objlist.Add(GameObject.Find("33"));
 
-        //ShipMoveSp = Ship_select._floatFieldRight[Level];
-        ShipMoveSp = 50;
 
-            makeRandomArr(3,1);
-        //makeRandomArr(Ship_select._Qusnum[Level], Ship_select._Rannum[Level]);
+        ImportTable();
+
+
+
+        ShipMoveSp = Ship_select._floatFieldRight[Level];
+        //ShipMoveSp = 50;;
+        //Debug.Log("Postable"+Postable.Count);
+        
+
+        ObjMoveStu = false;
+        click.clickopen = false;
+
+        //makeRandomArr(3,1);
+        i = 0;
+        QusArr = new string[Ship_select._Rannum[Level]];
+        AnsArr = new string[Ship_select._Rannum[Level]];
+        SequArr = new int[Ship_select._Qusnum[Level]];
+        makeRandomArr(Ship_select._Qusnum[Level], Ship_select._Rannum[Level]);
+
         ShowRandom();
     }
 
@@ -66,22 +85,34 @@ public class Ship_1 : MonoBehaviour {
 
         }
     }
+    
+    /// <summary>
+    /// 顯示或隱藏obj，In objlist[]
+    /// </summary>
+    void ShowObj()
+    {
+        for (int i = 0; i <= objlist.IndexOf(null) - 1; i++)
+        {
+            //objlist[i].SetActive(true);
+            objlist[i].GetComponent<Renderer>().sortingOrder = 4;
+        }
+        for (int i = Qusnum; i <= objlist.IndexOf(null) - 1; i++)
+        {
+            //objlist[i].SetActive(false);
+            objlist[i].GetComponent<Renderer>().sortingOrder = 0;
+
+        }
+    }
+
+    /// <summary>
+     /// 製作亂數，儲存於RandomArr[_Randnum]，
+     /// 有SequArr[_Randnum]可使用
+     /// </summary>
+     /// <param name="_Qusnum"></param>
+     /// <param name="_Randnum"></param>
      void makeRandomArr(int _Qusnum, int _Randnum)
     {
-            for (int i = 0; i <= 8; i++)
-            {
-                //objlist[i].SetActive(true);
-                objlist[i].GetComponent<Renderer>().sortingOrder = 4;
-            }
-            for (int i = _Qusnum; i <= 8; i++)
-            {
-                //objlist[i].SetActive(false);
-                objlist[i].GetComponent<Renderer>().sortingOrder = 0;
-
-            }
-            QusArr = new string[_Randnum];
-            AnsArr = new string[_Randnum];
-            SequArr = new int[_Qusnum];
+        
             RandomArr = new int[_Randnum];
             Qusnum = _Qusnum;
             Randnum = _Randnum;
@@ -99,6 +130,9 @@ public class Ship_1 : MonoBehaviour {
             }
     }
 
+    /// <summary>
+    /// 將random到的題目顯示，把題目紀錄至QusArr[]，呼叫delay()
+    /// </summary>
     public void ShowRandom()
     {
             x = 0;
@@ -123,6 +157,10 @@ public class Ship_1 : MonoBehaviour {
 
     }
     //呼叫後2秒執行下列程序
+    /// <summary>
+    /// delay n 秒，將題目顯示回去，讓物件ship開始移動，變可點擊
+    /// </summary>
+    /// <returns></returns>
     IEnumerator delay()
     {
         while (true)
@@ -144,6 +182,7 @@ public class Ship_1 : MonoBehaviour {
                     foreach (int Arr in RandomArr)
                     {
                         objlist[Arr - 1].GetComponent<SpriteRenderer>().sprite = Resources.Load("Hoertt/white", typeof(Sprite)) as Sprite;
+                        //Debug.Log(Arr-1);
                     }
                 }
                 catch (System.Exception e)
@@ -151,21 +190,22 @@ public class Ship_1 : MonoBehaviour {
 
                 }
 
+                makeRandomArr(3, 3);
 
+                for (int x = 0; x < 3; x++)
+                {
+                    TweenPosition.Begin(objlist[x], 0.5f, Postable[0][RandomArr[x]-1]);
+                }
+                yield return new WaitForSeconds(1f);
                 //click.clickopen = true;
 
                 //開始移動
                 //StartMove.StartObjMove();
 
-                try
-                {
-                    ObjMoveStu = true;
-                    click.clickopen = true;
-                }
-                catch (System.Exception e)
-                {
 
-                }
+                ObjMoveStu = true;
+                    click.clickopen = true;
+               
             
     }
             yield return null;
@@ -178,13 +218,18 @@ public class Ship_1 : MonoBehaviour {
         
     //    //ShowQusStatus = true;
     //}
+
+    /// <summary>
+    /// 物件點擊後回傳name，紀錄至AnsArr[]，且使物件顯示
+    /// </summary>
+    /// <param name="name"></param>
     public static void AnsList(string name)
     {
-        i = 0;
+        Debug.Log("i:"+i+" QusArr:"+QusArr.Length+"   "+Qusnum);
         if (name != null)
         {
 
-            if (i >= Randnum)
+            if (i >= QusArr.Length)
             {
                 i = 0;
                 AnsCover = true;
@@ -212,9 +257,9 @@ public class Ship_1 : MonoBehaviour {
 
     public  void CompareArr()
     {
-        for (int c = 0; c < Randnum; c++)
+        for (int c = 0; c < QusArr.Length; c++)
         {
-            for (int c2 = 0; c2 < Randnum; c2++)
+            for (int c2 = 0; c2 < QusArr.Length; c2++)
             {
                 //比對相等回傳0
                 if (string.Compare(QusArr[c], AnsArr[c2]) != 0)
@@ -226,7 +271,10 @@ public class Ship_1 : MonoBehaviour {
             }
         }
         Debug.Log("Anstatus: "+Anstatus);
-
+        for (int i = 0; i < AnsArr.Length; i++)
+        {
+            GameObject.Find(AnsArr[i]).GetComponent<SpriteRenderer>().sprite = Resources.Load("Hoertt/white", typeof(Sprite)) as Sprite;
+        }
         if (Anstatus)
         {
             GameObject.Find("ScoreText").GetComponent<Text>().text = "Great";
@@ -237,8 +285,8 @@ public class Ship_1 : MonoBehaviour {
         else
         {
             GameObject.Find("ScoreText").GetComponent<Text>().text = "NOPE";
-            Initialization();
             Anstatus = true;
+            Initialization(); 
         }
 
         Debug.Log("(Level: " + Level);
@@ -247,6 +295,23 @@ public class Ship_1 : MonoBehaviour {
     {
         Ship_1 a = new Ship_1();
         a.CompareArr();
+    }
+
+
+    void ImportTable()
+    {
+        Postable.Add(new List<Vector3>());
+        Postable[0].Add(new Vector3(-1.51f,0.49f,0.4f));
+        Postable[0].Add(new Vector3(-0.2f,-0.5f,0.41f));
+        Postable[0].Add(new Vector3(1.07f,-1.18f, 0.4f));
+
+
+        Postable.Add(new List<Vector3>());  
+        for(int c=0; c<Ship_select._Qusnum[Level];c++)
+        {
+            Debug.Log("c2:" + c);
+            Postable[1].Add(objlist[c].transform.localPosition);
+        }
     }
 }
 
