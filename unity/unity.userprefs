@@ -1,6 +1,6 @@
-﻿<Properties StartupItem="Assembly-CSharp.csproj">
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\program\Hoertt_program\ship\ObjMove.cs">
+﻿<Properties StartupItem="unity.Plugins.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Program\Hoertt_program\ship\Ship_1.cs">
     <Files>
       <File FileName="Assets\program\JT_program\Level1\Level1_Display.cs" Line="1" Column="1" />
       <File FileName="Assets\program\JT_program\Level1\Level1_Select.cs" Line="1" Column="1" />
@@ -9,11 +9,7 @@
       <File FileName="Assets\program\JT_program\EditorExWindow2.cs" Line="1" Column="1" />
       <File FileName="Assets\program\JT_program\EditorExWindow6.cs" Line="1" Column="1" />
       <File FileName="Assets\program\JT_program\test2.cs" Line="1" Column="1" />
-      <File FileName="Assets\program\JT_program\inheritance.cs" Line="1" Column="1" />
-      <File FileName="Assets\NGUI\Scripts\Tweening\TweenPosition.cs" Line="1" Column="1" />
-      <File FileName="Assets\program\JT_program\EditorExWindow1.cs" Line="1" Column="1" />
-      <File FileName="Assets\program\JT_program\EditorExWindow4.cs" Line="1" Column="1" />
-      <File FileName="Assets\program\Hoertt_program\ship\ObjMove.cs" Line="40" Column="32" />
+      <File FileName="Assets\Program\Hoertt_program\ship\Ship_1.cs" Line="182" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
