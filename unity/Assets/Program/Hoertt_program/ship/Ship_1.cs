@@ -6,12 +6,9 @@ using UnityEngine.UI;
 public class Ship_1 : MonoBehaviour {
     [SerializeField]
     private List<GameObject> objlist = new List<GameObject>();
-
-<<<<<<< HEAD
+    
     public static List<List <Vector3>> Postable = new List<List <Vector3>>();
-=======
-    List<List <Vector3>> Postable = new List<List <Vector3>>();
->>>>>>> 5397b7a86bc5dd1b2334fa3d9550fdf3d13bf3f7
+
     static int  Level = 0;
     int turn = 1;
     //GameObject ship = GameObject.Find("ship");
@@ -22,8 +19,7 @@ public class Ship_1 : MonoBehaviour {
     public static int[] RandomArr,SequArr;
     public static string[] QusArr,AnsArr;
     float ShipMoveSp;
-
-<<<<<<< HEAD
+    
     private GameObject[] LoadAnimal;
 
     public static List<GameObject> AnimalList = new List<GameObject>();
@@ -35,9 +31,7 @@ public class Ship_1 : MonoBehaviour {
         new Vector3(-1.19f,-3.67f),
         new Vector3(0.26f,-5.16f)
     };
-
-=======
->>>>>>> 5397b7a86bc5dd1b2334fa3d9550fdf3d13bf3f7
+    
     Vector3[] LV1Vec3 = new Vector3[3];
 
     static int Score = 0;
@@ -90,12 +84,9 @@ public class Ship_1 : MonoBehaviour {
 
 
         ImportTable();
-
-<<<<<<< HEAD
+        
         LoadAnimal = Resources.LoadAll<GameObject>("Hoertt/AnimalGroup");
-=======
 
->>>>>>> 5397b7a86bc5dd1b2334fa3d9550fdf3d13bf3f7
 
         ShipMoveSp = Ship_select._floatFieldRight[Level];
         //ShipMoveSp = 50;;
@@ -138,7 +129,6 @@ public class Ship_1 : MonoBehaviour {
     /// </summary>
     void ShowObj()
     {
-<<<<<<< HEAD
         Postable[Level].ForEach(GO => AnimalList.Add(new CreatAnimal(LoadAnimal[])));
 
         for (int i = 0; i <= objlist.IndexOf(null) - 1; i++)
@@ -151,18 +141,6 @@ public class Ship_1 : MonoBehaviour {
             //objlist[i].SetActive(false);
             objlist[i].GetComponent<Renderer>().sortingOrder = 0;
 
-=======
-        for (int i = 0; i <= objlist.IndexOf(null) - 1; i++)
-        {
-            //objlist[i].SetActive(true);
-            objlist[i].GetComponent<Renderer>().sortingOrder = 4;
-        }
-        for (int i = Qusnum; i <= objlist.IndexOf(null) - 1; i++)
-        {
-            //objlist[i].SetActive(false);
-            objlist[i].GetComponent<Renderer>().sortingOrder = 0;
-
->>>>>>> 5397b7a86bc5dd1b2334fa3d9550fdf3d13bf3f7
         }
     }
 
