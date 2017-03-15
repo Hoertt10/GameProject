@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>Temp\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_5_0;UNITY_5_5;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_VIDEO;ENABLE_VR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_5_1;UNITY_5_5;UNITY_5;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_DUCK_TYPING;ENABLE_GENERICS;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;PLATFORM_SUPPORTS_MONO;RENDER_SOFTWARE_CURSOR;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_SCRIPTING_NEW_CSHARP_COMPILER;UNITY_STANDALONE_WIN;UNITY_STANDALONE;ENABLE_SUBSTANCE;ENABLE_RUNTIME_GI;ENABLE_MOVIES;ENABLE_NETWORK;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;ENABLE_EVENT_QUEUE;ENABLE_CLUSTERINPUT;ENABLE_VIDEO;ENABLE_VR;ENABLE_WEBSOCKET_HOST;ENABLE_MONO;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_32;UNITY_EDITOR_WIN;UNITY_TEAM_LICENSE;UNITY_PRO_LICENSE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <NoWarn>0169</NoWarn>
@@ -39,10 +39,10 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="UnityEngine">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor">
-      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+      <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -72,6 +72,7 @@
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\PanWithMouse.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\PlayIdleAnimations.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\SetColorOnSelection.cs" />
+     <Compile Include="Assets\NGUI\Examples\Scripts\Other\ShaderQuality.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\Spin.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\SpinWithMouse.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\Other\Tutorial5.cs" />
@@ -146,7 +147,6 @@
      <Compile Include="Assets\NGUI\Scripts\Internal\UIWidget.cs" />
      <Compile Include="Assets\NGUI\Scripts\Tweening\AnimatedAlpha.cs" />
      <Compile Include="Assets\NGUI\Scripts\Tweening\AnimatedColor.cs" />
-     <Compile Include="Assets\NGUI\Scripts\Tweening\AnimatedWidget.cs" />
      <Compile Include="Assets\NGUI\Scripts\Tweening\SpringPosition.cs" />
      <Compile Include="Assets\NGUI\Scripts\Tweening\TweenAlpha.cs" />
      <Compile Include="Assets\NGUI\Scripts\Tweening\TweenColor.cs" />
@@ -167,7 +167,6 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UICamera.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIFont.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIInput.cs" />
-     <Compile Include="Assets\NGUI\Scripts\UI\UIInputOnGUI.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UILabel.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UILocalize.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIOrthoCamera.cs" />
@@ -182,63 +181,64 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
      <Compile Include="Assets\Pixelplacement\iTweenPath\iTweenPath.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\CarLoop\CarMove.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\CarLoop\sound.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\CarLoop\trigger.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\hores\DefalueHorse.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\hores\HoresMove.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\ship\ObjMove.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\ship\Ship_1.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\ship\Ship_2.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\ship\Ship_3.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\ship\Ship_select.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\ship\StartMove.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\ship\click.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\ship\defalue.cs" />
+     <Compile Include="Assets\Program\Hoertt_program\ship\show.cs" />
+     <Compile Include="Assets\Program\JT_program\EditorExWindow1.cs" />
+     <Compile Include="Assets\Program\JT_program\EditorExWindow2.cs" />
+     <Compile Include="Assets\Program\JT_program\EditorExWindow3.cs" />
+     <Compile Include="Assets\Program\JT_program\EditorExWindow4.cs" />
+     <Compile Include="Assets\Program\JT_program\EditorExWindow5.cs" />
+     <Compile Include="Assets\Program\JT_program\EditorExWindow6.cs" />
+     <Compile Include="Assets\Program\JT_program\Level1\Level1_Display.cs" />
+     <Compile Include="Assets\Program\JT_program\Level1\Level1_Display_Hard.cs" />
+     <Compile Include="Assets\Program\JT_program\Level1\Level1_Display_Normal.cs" />
+     <Compile Include="Assets\Program\JT_program\Level1\Level1_Listener.cs" />
+     <Compile Include="Assets\Program\JT_program\Level1\Level1_Select.cs" />
+     <Compile Include="Assets\Program\JT_program\Level1\Level1_Timer.cs" />
+     <Compile Include="Assets\Program\JT_program\Level1\Menu1_start.cs" />
+     <Compile Include="Assets\Program\JT_program\Level2\Level2_Cylinder_rotation.cs" />
+     <Compile Include="Assets\Program\JT_program\Level2\Level2_Menu_start.cs" />
+     <Compile Include="Assets\Program\JT_program\Level2\Level2_display.cs" />
+     <Compile Include="Assets\Program\JT_program\Level3\Level3_Cylinder_rotation.cs" />
+     <Compile Include="Assets\Program\JT_program\Level3\Level3_display.cs" />
+     <Compile Include="Assets\Program\JT_program\Level3\level3test.cs" />
+     <Compile Include="Assets\Program\JT_program\Thread\Thread_0.cs" />
+     <Compile Include="Assets\Program\JT_program\Thread\Thread_1.cs" />
+     <Compile Include="Assets\Program\JT_program\Thread\Thread_2.cs" />
+     <Compile Include="Assets\Program\JT_program\Thread\Thread_3.cs" />
+     <Compile Include="Assets\Program\JT_program\Thread\Thread_4.cs" />
+     <Compile Include="Assets\Program\JT_program\Thread\Thread_5.cs" />
+     <Compile Include="Assets\Program\JT_program\Thread\Thread_6.cs" />
+     <Compile Include="Assets\Program\JT_program\inheritance.cs" />
+     <Compile Include="Assets\Program\JT_program\myclass.cs" />
+     <Compile Include="Assets\Program\JT_program\myclass2.cs" />
+     <Compile Include="Assets\Program\JT_program\test2.cs" />
      <Compile Include="Assets\ProgressBar\Script\ProgressBarBehaviour.cs" />
      <Compile Include="Assets\ProgressBar\Script\ProgressRadialBehaviour.cs" />
      <Compile Include="Assets\ProgressBar\Script\Utils.cs" />
-     <Compile Include="Assets\program\Hoertt_program\CarLoop\CarMove.cs" />
-     <Compile Include="Assets\program\Hoertt_program\CarLoop\sound.cs" />
-     <Compile Include="Assets\program\Hoertt_program\CarLoop\trigger.cs" />
-     <Compile Include="Assets\program\Hoertt_program\hores\DefalueHorse.cs" />
-     <Compile Include="Assets\program\Hoertt_program\hores\HoresMove.cs" />
-     <Compile Include="Assets\program\Hoertt_program\ship\ObjMove.cs" />
-     <Compile Include="Assets\program\Hoertt_program\ship\StartMove.cs" />
-     <Compile Include="Assets\program\Hoertt_program\ship\click.cs" />
-     <Compile Include="Assets\program\Hoertt_program\ship\defalue.cs" />
-     <Compile Include="Assets\program\Hoertt_program\ship\show.cs" />
-     <Compile Include="Assets\program\JT_program\EditorExWindow1.cs" />
-     <Compile Include="Assets\program\JT_program\EditorExWindow2.cs" />
-     <Compile Include="Assets\program\JT_program\EditorExWindow3.cs" />
-     <Compile Include="Assets\program\JT_program\EditorExWindow4.cs" />
-     <Compile Include="Assets\program\JT_program\EditorExWindow5.cs" />
-     <Compile Include="Assets\program\JT_program\EditorExWindow6.cs" />
-     <Compile Include="Assets\program\JT_program\Level1\Level1_Display.cs" />
-     <Compile Include="Assets\program\JT_program\Level1\Level1_Display_Hard.cs" />
-     <Compile Include="Assets\program\JT_program\Level1\Level1_Display_Normal.cs" />
-     <Compile Include="Assets\program\JT_program\Level1\Level1_Listener.cs" />
-     <Compile Include="Assets\program\JT_program\Level1\Level1_Select.cs" />
-     <Compile Include="Assets\program\JT_program\Level1\Level1_Timer.cs" />
-     <Compile Include="Assets\program\JT_program\Level1\Menu1_start.cs" />
-     <Compile Include="Assets\program\JT_program\Level2\Level2_Cylinder_rotation.cs" />
-     <Compile Include="Assets\program\JT_program\Level2\Level2_Menu_start.cs" />
-     <Compile Include="Assets\program\JT_program\Level2\Level2_display.cs" />
-     <Compile Include="Assets\program\JT_program\Level3\Level3_Cylinder_rotation.cs" />
-     <Compile Include="Assets\program\JT_program\Level3\Level3_display.cs" />
-     <Compile Include="Assets\program\JT_program\Level3\level3test.cs" />
-     <Compile Include="Assets\program\JT_program\Thread\Thread_0.cs" />
-     <Compile Include="Assets\program\JT_program\Thread\Thread_1.cs" />
-     <Compile Include="Assets\program\JT_program\Thread\Thread_2.cs" />
-     <Compile Include="Assets\program\JT_program\Thread\Thread_3.cs" />
-     <Compile Include="Assets\program\JT_program\Thread\Thread_4.cs" />
-     <Compile Include="Assets\program\JT_program\Thread\Thread_5.cs" />
-     <Compile Include="Assets\program\JT_program\Thread\Thread_6.cs" />
-     <Compile Include="Assets\program\JT_program\inheritance.cs" />
-     <Compile Include="Assets\program\JT_program\myclass.cs" />
-     <Compile Include="Assets\program\JT_program\myclass2.cs" />
-     <Compile Include="Assets\program\JT_program\test2.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
-     <None Include="Assets\NGUI\ReadMe - 3.8.0.txt" />
+     <None Include="Assets\NGUI\ReadMe - 3.6.8.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
      <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 1.shader" />
-     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (TextureClip).shader" />
-     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (TextureClip).shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 2.shader" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Masked Colored.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored 3.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
-     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (TextureClip).shader" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored 1.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
@@ -258,28 +258,27 @@
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Additive Colored.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
      <None Include="Assets\NGUI\Examples\Shaders\Refractive.shader" />
-     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text (TextureClip).shader" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\NGUI\Examples\Resources\Localization.txt" />
  <Reference Include="UnityEngine.UI">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.PlaymodeTestsRunner">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/PlaymodeTestsRunner/UnityEngine.PlaymodeTestsRunner.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/PlaymodeTestsRunner/UnityEngine.PlaymodeTestsRunner.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.HoloLens">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.VR">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityVR/RuntimeEditor/UnityEngine.VR.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

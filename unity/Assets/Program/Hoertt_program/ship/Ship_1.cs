@@ -7,7 +7,7 @@ public class Ship_1 : MonoBehaviour {
     [SerializeField]
     private List<GameObject> objlist = new List<GameObject>();
 
-    List<List <Vector3>> Postable = new List<List <Vector3>>();
+    public static List<List <Vector3>> Postable = new List<List <Vector3>>();
     static int  Level = 0;
     int turn = 1;
     //GameObject ship = GameObject.Find("ship");
@@ -19,11 +19,47 @@ public class Ship_1 : MonoBehaviour {
     public static string[] QusArr,AnsArr;
     float ShipMoveSp;
 
+    private GameObject[] LoadAnimal;
+
+    public static List<GameObject> AnimalList = new List<GameObject>();
+
+    public static Vector3[] AppearPos = new Vector3[]
+    {
+        new Vector3(-4.22f,-2.09f),
+        new Vector3(-2.75f,-2.73f),
+        new Vector3(-1.19f,-3.67f),
+        new Vector3(0.26f,-5.16f)
+    };
+
     Vector3[] LV1Vec3 = new Vector3[3];
 
     static int Score = 0;
     static bool Anstatus = true,DelayStatus=false;
     // Use this for initialization
+
+    public class CreatAnimal
+    {
+        public static int P_Pos = 0;
+
+        public GameObject GetAnimal { get; private set; }
+
+        public CreatAnimal (GameObject GO)
+        {
+            GO = Instantiate(GO, parent: GameObject.Find("AnimalGroup").transform)as GameObject;
+
+            GO.transform.localPosition = AppearPos[P_Pos%4];
+
+            GO.transform.localScale = Vector3.one;
+
+            TweenPosition.Begin(GO, 1f, Postable[Level][P_Pos++]);
+
+            AnimalList.Add(GO);
+
+            GetAnimal(GO);
+
+        }
+
+    }
     void Start () {
 
                 //初始化
@@ -48,7 +84,7 @@ public class Ship_1 : MonoBehaviour {
 
         ImportTable();
 
-
+        LoadAnimal = Resources.LoadAll<GameObject>("Hoertt/AnimalGroup");
 
         ShipMoveSp = Ship_select._floatFieldRight[Level];
         //ShipMoveSp = 50;;
@@ -91,6 +127,8 @@ public class Ship_1 : MonoBehaviour {
     /// </summary>
     void ShowObj()
     {
+        Postable[Level].ForEach(GO => AnimalList.Add(new CreatAnimal(LoadAnimal[])));
+
         for (int i = 0; i <= objlist.IndexOf(null) - 1; i++)
         {
             //objlist[i].SetActive(true);
