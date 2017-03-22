@@ -22,14 +22,14 @@ public class Ship_1 : MonoBehaviour {
     
     private GameObject[] LoadAnimal;
 
-    public static List<GameObject> AnimalList = new List<GameObject>();
+    public static List<CreatAnimal> AnimalList = new List<CreatAnimal>();
 
     public static Vector3[] AppearPos = new Vector3[]
     {
-        new Vector3(-4.22f,-2.09f),
-        new Vector3(-2.75f,-2.73f),
-        new Vector3(-1.19f,-3.67f),
-        new Vector3(0.26f,-5.16f)
+        new Vector3(-2.31f,-3.6f),
+        new Vector3(-0.83f,-3.6f),
+        new Vector3(0.86f,-3.6f),
+        new Vector3(2.35f,-3.6f)
     };
     
     Vector3[] LV1Vec3 = new Vector3[3];
@@ -46,46 +46,56 @@ public class Ship_1 : MonoBehaviour {
 
         public CreatAnimal (GameObject GO)
         {
-            GO = Instantiate(GO, parent: GameObject.Find("AnimalGroup").transform)as GameObject;
+            GO = Instantiate(GO, parent: GameObject.Find("123").transform)as GameObject;
 
-            GO.transform.localPosition = AppearPos[P_Pos%4];
+            GO.transform.position = AppearPos[P_Pos % 4];
 
-            GO.transform.localScale = Vector3.one;
+            GO.transform.localScale = Vector3.one*3;
 
             TweenPosition.Begin(GO, 1f, Postable[Level][P_Pos++]);
 
-            AnimalList.Add(GO);
+          //  AnimalList.Add(GO);
 
-            GetAnimal(GO);
+            GetAnimal=GO;
 
         }
 
     }
     void Start () {
 
-                //初始化
+
+        //初始化
+
+
         Initialization();
+
         StartCoroutine(delay());
+
     }
 
     //傳入變數SP,Qusnum,Rannum
     public  virtual void Initialization()
     {
-        objlist.Clear();
-        objlist.Add(GameObject.Find("11"));
-        objlist.Add(GameObject.Find("21"));
-        objlist.Add(GameObject.Find("31"));//foreach
-        objlist.Add(GameObject.Find("12"));
-        objlist.Add(GameObject.Find("22"));
-        objlist.Add(GameObject.Find("32"));
-        objlist.Add(GameObject.Find("13"));
-        objlist.Add(GameObject.Find("23"));
-        objlist.Add(GameObject.Find("33"));
+        //objlist.Clear();
+        //objlist.Add(GameObject.Find("11"));
+        //objlist.Add(GameObject.Find("21"));
+        //objlist.Add(GameObject.Find("31"));//foreach
+        //objlist.Add(GameObject.Find("12"));
+        //objlist.Add(GameObject.Find("22"));
+        //objlist.Add(GameObject.Find("32"));
+        //objlist.Add(GameObject.Find("13"));
+        //objlist.Add(GameObject.Find("23"));
+        //objlist.Add(GameObject.Find("33"));
+
+        LoadAnimal = Resources.LoadAll<GameObject>("Hoertt/AnimalGroup");
 
 
         ImportTable();
-        
-        LoadAnimal = Resources.LoadAll<GameObject>("Hoertt/AnimalGroup");
+
+        Postable[Level].ForEach(GO => AnimalList.Add(new CreatAnimal(LoadAnimal[0])));
+
+
+
 
 
         ShipMoveSp = Ship_select._floatFieldRight[Level];
@@ -103,7 +113,7 @@ public class Ship_1 : MonoBehaviour {
         SequArr = new int[Ship_select._Qusnum[Level]];
         makeRandomArr(Ship_select._Qusnum[Level], Ship_select._Rannum[Level]);
 
-        ShowRandom();
+      //  ShowRandom();
     }
 
     // Update is called once per frame
@@ -129,7 +139,6 @@ public class Ship_1 : MonoBehaviour {
     /// </summary>
     void ShowObj()
     {
-        Postable[Level].ForEach(GO => AnimalList.Add(new CreatAnimal(LoadAnimal[])));
 
         for (int i = 0; i <= objlist.IndexOf(null) - 1; i++)
         {
@@ -211,6 +220,8 @@ public class Ship_1 : MonoBehaviour {
                 float WaitSecond = Ship_select._floatFieldLeft[Level];
                 //等2秒後
                 yield return new WaitForSeconds(WaitSecond);
+                
+
                 //ShowQusStatus = false;
                 //將顯示為black的題目返回至white
 
@@ -347,11 +358,11 @@ public class Ship_1 : MonoBehaviour {
 
 
         Postable.Add(new List<Vector3>());  
-        for(int c=0; c<Ship_select._Qusnum[Level];c++)
-        {
-            Debug.Log("c2:" + c);
-            Postable[1].Add(objlist[c].transform.localPosition);
-        }
+        //for(int c=0; c<Ship_select._Qusnum[Level];c++)
+        //{
+        //    Debug.Log("c2:" + c);
+        //    Postable[1].Add(objlist[c].transform.localPosition);
+        //}
     }
 }
 
