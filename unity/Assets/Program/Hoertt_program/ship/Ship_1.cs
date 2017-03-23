@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Ship_1 : MonoBehaviour {
-    [SerializeField]
-    private List<GameObject> objlist = new List<GameObject>();
+    //[SerializeField]
+    public static List<GameObject> objlist = new List<GameObject>();
     
     public static List<List <Vector3>> Postable = new List<List <Vector3>>();
-
-    static int  Level = 0;
+    float timer = 0;
+    static int  Level = 2 ,GameMode=3;
     int turn = 1;
-    //GameObject ship = GameObject.Find("ship");
+    GameObject Gship = GameObject.Find("ship");
     //GameObject ShipRotaPoint = GameObject.Find("ShipRotaPoint");
     private static int i = 0, x = 0,Qusnum, Randnum;
     public static bool ObjMoveStu=false;
@@ -19,17 +20,22 @@ public class Ship_1 : MonoBehaviour {
     public static int[] RandomArr,SequArr;
     public static string[] QusArr,AnsArr;
     float ShipMoveSp;
-    
+
+    public static bool WantDelayStu = false;
+    public static float WantDelayTime = 1;
+    Vector3 shipos = GameObject.Find("ship").transform.position;
+
     private GameObject[] LoadAnimal;
 
     public static List<CreatAnimal> AnimalList = new List<CreatAnimal>();
+    
 
     public static Vector3[] AppearPos = new Vector3[]
     {
-        new Vector3(-2.31f,-3.6f),
-        new Vector3(-0.83f,-3.6f),
-        new Vector3(0.86f,-3.6f),
-        new Vector3(2.35f,-3.6f)
+        new Vector3(-3.32f,-1.84f),
+        new Vector3(-1.73f,-1.84f),
+        new Vector3(1.5f,-1.84f),
+        new Vector3(3.54f,-1.84f)
     };
     
     Vector3[] LV1Vec3 = new Vector3[3];
@@ -46,16 +52,24 @@ public class Ship_1 : MonoBehaviour {
 
         public CreatAnimal (GameObject GO)
         {
-            GO = Instantiate(GO, parent: GameObject.Find("123").transform)as GameObject;
+            GO = Instantiate(GO, parent: GameObject.Find("ship").transform)as GameObject;
 
             GO.transform.position = AppearPos[P_Pos % 4];
 
             GO.transform.localScale = Vector3.one*3;
 
+            GO.name = "Player("+P_Pos +")";
             TweenPosition.Begin(GO, 1f, Postable[Level][P_Pos++]);
 
-          //  AnimalList.Add(GO);
+            if (P_Pos>=Postable[Level].Count)
+            {
+                P_Pos = 0;
+            }
+           
+            //  AnimalList.Add(GO);
 
+            objlist.Add(GO);
+            
             GetAnimal=GO;
 
         }
@@ -66,6 +80,7 @@ public class Ship_1 : MonoBehaviour {
 
         //初始化
 
+        ImportTable();
 
         Initialization();
 
@@ -76,7 +91,17 @@ public class Ship_1 : MonoBehaviour {
     //傳入變數SP,Qusnum,Rannum
     public  virtual void Initialization()
     {
-        //objlist.Clear();
+        i = 0;
+        timer = 0;
+        ObjMoveStu = false;
+        click.clickopen = false;
+
+        foreach (GameObject item in objlist)
+        {
+            Destroy(item);
+        }
+
+        objlist = new List<GameObject>();
         //objlist.Add(GameObject.Find("11"));
         //objlist.Add(GameObject.Find("21"));
         //objlist.Add(GameObject.Find("31"));//foreach
@@ -88,14 +113,13 @@ public class Ship_1 : MonoBehaviour {
         //objlist.Add(GameObject.Find("33"));
 
         LoadAnimal = Resources.LoadAll<GameObject>("Hoertt/AnimalGroup");
+        
 
-
-        ImportTable();
-
+        Debug.Log(Level);
         Postable[Level].ForEach(GO => AnimalList.Add(new CreatAnimal(LoadAnimal[0])));
 
 
-
+        Debug.Log(objlist.Count);
 
 
         ShipMoveSp = Ship_select._floatFieldRight[Level];
@@ -103,55 +127,69 @@ public class Ship_1 : MonoBehaviour {
         //Debug.Log("Postable"+Postable.Count);
         
 
-        ObjMoveStu = false;
-        click.clickopen = false;
-
         //makeRandomArr(3,1);
-        i = 0;
         QusArr = new string[Ship_select._Rannum[Level]];
         AnsArr = new string[Ship_select._Rannum[Level]];
         SequArr = new int[Ship_select._Qusnum[Level]];
         makeRandomArr(Ship_select._Qusnum[Level], Ship_select._Rannum[Level]);
 
-      //  ShowRandom();
+        ShowRandom();
     }
 
     // Update is called once per frame
     void Update () {
+        timer += Time.deltaTime;
 		if(ObjMoveStu==true)
         {
-            if (GameObject.Find("ship").transform.localRotation.eulerAngles.z >= 350)
+            switch (GameMode)
             {
-                turn = 1;
+                case 1:
+                    break;
+
+                case 2:
+                    if (GameObject.Find("ship").transform.localRotation.eulerAngles.z + 35 >= 360 + 35)
+                    {
+                        //Debug.Log(GameObject.Find("ship").transform.localRotation.eulerAngles.z + "   " + turn);
+                        turn = 1;
+                    }
+                    else if (GameObject.Find("ship").transform.localRotation.eulerAngles.z >= 65)
+                    {
+                        //Debug.Log(GameObject.Find("ship").transform.localRotation.eulerAngles.z + "   " + turn);
+                        turn = -1;
+                    }
+                    GameObject.Find("ship").transform.RotateAround(GameObject.Find("ShipRotaPoint").transform.position, Vector3.forward, turn * ShipMoveSp * Time.deltaTime);
+                    break;
+                case 3:
+                    //Debug.Log(timer);
+                    GameObject.Find("ship").transform.Translate(Mathf.Cos(timer) *0.01f*Vector3.right);
+                    GameObject.Find("ship").transform.Translate(Mathf.Sin(timer*1.9f) * 0.01f * Vector3.up);
+                    break;
+                default:
+                    break;
             }
-            else if (GameObject.Find("ship").transform.localRotation.eulerAngles.z >= 65)
-            {
-                turn = -1;
-            }
-            //Debug.Log(ship.transform.localRotation.eulerAngles.z + "   " + turn);
-            GameObject.Find("ship").transform.RotateAround(GameObject.Find("ShipRotaPoint").transform.position, Vector3.forward, turn * ShipMoveSp * Time.deltaTime);
+            
 
         }
     }
     
-    /// <summary>
-    /// 顯示或隱藏obj，In objlist[]
-    /// </summary>
-    void ShowObj()
-    {
+    ///// <summary>
+    ///// 顯示或隱藏obj，In objlist[]
+    ///// </summary>
+    //void ShowObj()
+    //{
 
-        for (int i = 0; i <= objlist.IndexOf(null) - 1; i++)
-        {
-            //objlist[i].SetActive(true);
-            objlist[i].GetComponent<Renderer>().sortingOrder = 4;
-        }
-        for (int i = Qusnum; i <= objlist.IndexOf(null) - 1; i++)
-        {
-            //objlist[i].SetActive(false);
-            objlist[i].GetComponent<Renderer>().sortingOrder = 0;
+    //    for (int i = 0; i <= objlist.IndexOf(null) - 1; i++)
+    //    {
+    //        //objlist[i].SetActive(true);
+    //        objlist[i].GetComponent<Renderer>().sortingOrder = 4;
+    //    }
+    //    for (int i = Qusnum; i <= objlist.IndexOf(null) - 1; i++)
+    //    {
+    //        //objlist[i].SetActive(false);
+    //        objlist[i].GetComponent<Renderer>().sortingOrder = 0;
 
-        }
-    }
+    //    }
+    //}
 
     /// <summary>
      /// 製作亂數，儲存於RandomArr[_Randnum]，
@@ -194,10 +232,7 @@ public class Ship_1 : MonoBehaviour {
                 Debug.Log(QusArr[x]);
                 x++;
                 if (x >= Qusnum) x = 0;
-                //顯示題目為black
-                
-
-
+            //顯示題目為black
                 objlist[Arr - 1].GetComponent<SpriteRenderer>().sprite = Resources.Load("Hoertt/black", typeof(Sprite)) as Sprite;
             }
             
@@ -220,42 +255,35 @@ public class Ship_1 : MonoBehaviour {
                 float WaitSecond = Ship_select._floatFieldLeft[Level];
                 //等2秒後
                 yield return new WaitForSeconds(WaitSecond);
-                
-
                 //ShowQusStatus = false;
                 //將顯示為black的題目返回至white
 
                 //Debug.Log(Arr);
-
-
-                try
-                {
+                
                     foreach (int Arr in RandomArr)
                     {
                         objlist[Arr - 1].GetComponent<SpriteRenderer>().sprite = Resources.Load("Hoertt/white", typeof(Sprite)) as Sprite;
                         //Debug.Log(Arr-1);
                     }
-                }
-                catch (System.Exception e)
+
+                yield return  null;
+
+                makeRandomArr(objlist.Count, objlist.Count);
+
+                Debug.Log("obj:" + objlist.Count);
+                Debug.Log( RandomArr.Count());
+                for (int x = 0; x < objlist.Count; x++)
                 {
-
+                    Debug.Log("x:"+x);
+                    TweenPosition.Begin(objlist[x], 0.5f, Postable[Level][RandomArr[x]-1]);
                 }
 
-                makeRandomArr(3, 3);
-
-                for (int x = 0; x < 3; x++)
-                {
-                    TweenPosition.Begin(objlist[x], 0.5f, Postable[0][RandomArr[x]-1]);
-                }
-                yield return new WaitForSeconds(1f);
-                //click.clickopen = true;
-
-                //開始移動
-                //StartMove.StartObjMove();
+                yield return new WaitForSeconds(2f);
+                
 
 
                 ObjMoveStu = true;
-                    click.clickopen = true;
+                click.clickopen = true;
                
             
     }
@@ -263,6 +291,26 @@ public class Ship_1 : MonoBehaviour {
 }
         //StopCoroutine(delay());
     }
+
+    void IWantDelay(float DelayTime)
+    {
+        StartCoroutine(Wantdelay());
+        WantDelayTime = DelayTime;
+        WantDelayStu = true;
+    }
+    IEnumerator Wantdelay()
+    {
+        while (true)
+        {
+            if (WantDelayStu == true)
+            { 
+                yield return new WaitForSeconds(WantDelayTime);
+                WantDelayStu = false;
+            }
+            yield return null;
+        }
+    }
+
     //呼叫delay函數
     //void DelayRecover()
     //{
@@ -329,7 +377,8 @@ public class Ship_1 : MonoBehaviour {
         if (Anstatus)
         {
             GameObject.Find("ScoreText").GetComponent<Text>().text = "Great";
-            Level++;
+            Anstatus = true;
+            //Level++;
             Initialization();
 
         }
@@ -349,15 +398,26 @@ public class Ship_1 : MonoBehaviour {
     }
 
 
+
     void ImportTable()
     {
         Postable.Add(new List<Vector3>());
-        Postable[0].Add(new Vector3(-1.51f,0.49f,0.4f));
-        Postable[0].Add(new Vector3(-0.2f,-0.5f,0.41f));
-        Postable[0].Add(new Vector3(1.07f,-1.18f, 0.4f));
+        Postable[0].Add(new Vector3(-1.6f, 0.08f, 0.4f));
+        Postable[0].Add(new Vector3(-0.2f, 0.08f, 0.41f));
+        Postable[0].Add(new Vector3(1.07f, 0.08f, 0.4f));
 
 
-        Postable.Add(new List<Vector3>());  
+        Postable.Add(new List<Vector3>());
+        Postable[1].Add(new Vector3(-2f, 0.2f, 0.4f));
+        Postable[1].Add(new Vector3(-0.72f, 0.2f, 0.4f));
+        Postable[1].Add(new Vector3(0.79f, 0.2f, 0.4f));
+        Postable[1].Add(new Vector3(2f, 0.2f, 0.4f));
+
+        Postable.Add(new List<Vector3>());
+        Postable[2].Add(new Vector3(-1.16f, 0.2f, 0.4f));
+        Postable[2].Add(new Vector3(0.99f, 0.2f, 0.4f));
+        Postable[2].Add(new Vector3(0.99f, -0.58f, 0.4f));
+        Postable[2].Add(new Vector3(-1.16f, -0.58f, 0.4f));
         //for(int c=0; c<Ship_select._Qusnum[Level];c++)
         //{
         //    Debug.Log("c2:" + c);
