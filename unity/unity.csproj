@@ -81,6 +81,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\CameraTargeting.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\CompoundObjectController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\DelayedDestroyController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\FlashingController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\HighlightingController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\OccluderController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\RotationController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\SceneLoader.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\SpectrumController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\StaticOccluderController.cs" />
+    <Compile Include="Assets\HighlightingSystemDemo\Scripts\WallMovementController.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
     <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />
@@ -221,6 +232,7 @@
     <Compile Include="Assets\Program\Hoertt_program\CarLoop\trigger.cs" />
     <Compile Include="Assets\Program\Hoertt_program\hores\DefalueHorse.cs" />
     <Compile Include="Assets\Program\Hoertt_program\hores\HoresMove.cs" />
+    <Compile Include="Assets\Program\Hoertt_program\hores\Hores_Click.cs" />
     <Compile Include="Assets\Program\Hoertt_program\ship\ObjMove.cs" />
     <Compile Include="Assets\Program\Hoertt_program\ship\Ship_1.cs" />
     <Compile Include="Assets\Program\Hoertt_program\ship\Ship_2.cs" />
@@ -263,6 +275,8 @@
     <Compile Include="Assets\ProgressBar\Script\ProgressBarBehaviour.cs" />
     <Compile Include="Assets\ProgressBar\Script\ProgressRadialBehaviour.cs" />
     <Compile Include="Assets\ProgressBar\Script\Utils.cs" />
+    <Compile Include="Assets\Scripts\JT_program\iarray.cs" />
+    <Compile Include="Assets\Scripts\JT_program\n_m_array.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
@@ -298,6 +312,13 @@
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 2.shader" />
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
     <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingBlur.shader" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingComposite.shader" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingInclude.cginc" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilOpaque.shader" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilOpaqueZ.shader" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparent.shader" />
+    <None Include="Assets\Plugins\HighlightingSystem\Resources\HighlightingStencilTransparentZ.shader" />
     <None Include="Assets\Plugins\Pixelplacement\iTween\ReadMe!\ReadMe!.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

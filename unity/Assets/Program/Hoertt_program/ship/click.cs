@@ -1,29 +1,32 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Specialized;
+using UnityEngine;
 
-public class click : MonoBehaviour {
-	public GameObject obj;
+public class click : MonoBehaviour
+{
+    public GameObject obj;
 
     public static bool clickopen = false;
-	//int ID;
+    //int ID;
     new string name;
 
 
 
-	// Use this for initialization
-	void Start () {
-		
-	}
+    // Use this for initialization
+    void Start()
+    {
+        UIEventListener.Get(obj).onClick = clickenvent;
+    }
 
-	// Update is called once per frame
-	void Update () {
-        
-        
-	}
-
-	void OnMouseDown(){
-        Debug.Log("click: "+clickopen);
+    // Update is called once per frame
+    void Update()
+    {
+     
+    }
+    void clickenvent (GameObject go)
+    {
+        Debug.Log(go.name);
+        Debug.Log("click: " + clickopen);
         if (clickopen)
         {
             //show.StaPos(obj.transform.position);
@@ -33,8 +36,13 @@ public class click : MonoBehaviour {
             //ID = obj.GetInstanceID ();
             //Debug.Log(ID);
             //Debug.Log(name);
-            name = obj.name;
+            name = go.name;
             Ship_1.AnsList(name);
         }
+    }
+
+    void OnMouseDown()
+    {
+        
     }
 }
